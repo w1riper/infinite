@@ -1,1177 +1,1661 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wiriper | مبین</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WIRIPER — طراحی و توسعه‌ی تجربه‌های دیجیتال دقیق و ماندگار. وب‌سایت، لندینگ‌پیج، برندینگ و بهینه‌سازی فنی.">
+  <title>WIRIPER — Digital Design & Development</title>
 
-<!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23040404'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' font-family='monospace' fill='%23c9a84c'>W</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23040404'/><text y='.9em' font-size='80' x='50%' text-anchor='middle' font-family='monospace' fill='%23c9a84c'>W</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=JetBrains+Mono:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wiriper | مبین — Network Security · Developer">
-<meta property="og:description" content="شکست تو رو نمی‌کشه — هویتت رو می‌سازه. Infinite × Wiriper">
-<meta property="og:image" content="IMG_4363.jpeg">
-<meta property="og:url" content="">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Wiriper | مبین">
-<meta name="twitter:description" content="Network Security · Developer · Infinite">
-<meta name="twitter:image" content="IMG_4363.jpeg">
-<meta name="theme-color" content="#040404">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<!-- PWA Manifest inline -->
-<link rel="manifest" href="data:application/json,{%22name%22:%22Wiriper%22,%22short_name%22:%22Wiriper%22,%22start_url%22:%22/%22,%22display%22:%22standalone%22,%22background_color%22:%22%23040404%22,%22theme_color%22:%22%23c9a84c%22,%22icons%22:[{%22src%22:%22IMG_4363.jpeg%22,%22sizes%22:%22192x192%22,%22type%22:%22image/jpeg%22}]}">
+    :root {
+      --gold:    #c9a84c;
+      --gold-dim: rgba(201,168,76,0.15);
+      --red:     #8b1a1a;
+      --bg:      #080808;
+      --bg2:     #0d0d0d;
+      --bg3:     #111;
+      --text:    #e8e8e8;
+      --text-dim: rgba(232,232,232,0.5);
+      --text-faint: rgba(232,232,232,0.25);
+      --border:  rgba(255,255,255,0.07);
+    }
 
-<!-- HTTPS redirect -->
-<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https:'+location.href.substring(5));</script>
+    html { scroll-behavior: smooth; }
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&family=Orbitron:wght@400;700;900&display=swap');
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Vazirmatn', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-:root {
-  --gold: #c9a84c;
-  --gold-light: #f0cc6e;
-  --gold-dim: rgba(201,168,76,.15);
-  --red: #c0392b;
-  --red-light: #e74c3c;
-  --red-dim: rgba(192,57,43,.12);
-  --dark: #040404;
-  --dark2: #080808;
-  --card: #0c0c0c;
-  --card2: #101010;
-  --border: rgba(255,255,255,.05);
-  --text: #d8d8d8;
-  --muted: #484848;
-}
+    ::selection { background: var(--gold-dim); color: var(--gold); }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+    /* ── Typography ── */
+    .font-orbitron { font-family: 'Orbitron', sans-serif; }
+    .font-mono     { font-family: 'JetBrains Mono', monospace; }
 
-body {
-  background: var(--dark);
-  color: var(--text);
-  font-family: 'Vazirmatn', sans-serif;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
 
-/* ─── CURSOR ─── */
-@media (pointer: fine) {
-  body { cursor: none; }
-  #cursor, #cursorRing {
-    position: fixed; border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    will-change: transform;
-    top: 0; left: 0;
-  }
-  #cursor {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    box-shadow: 0 0 12px var(--gold), 0 0 24px rgba(201,168,76,.3);
-    transition: width .15s, height .15s, background .15s, box-shadow .15s;
-  }
-  #cursorRing {
-    width: 32px; height: 32px;
-    border: 1px solid rgba(201,168,76,.4);
-    transition: width .2s, height .2s, border-color .2s;
-  }
-  #cursor.h { width: 18px; height: 18px; background: var(--red); box-shadow: 0 0 12px var(--red), 0 0 24px rgba(192,57,43,.3); }
-  #cursorRing.h { width: 44px; height: 44px; border-color: rgba(192,57,43,.5); }
-}
-@media (pointer: coarse) { #cursor, #cursorRing { display: none; } }
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
 
-/* ─── CANVAS ─── */
-#bg-canvas {
-  position: fixed; inset: 0;
-  width: 100%; height: 100%;
-  z-index: 0; pointer-events: none;
-}
+    section {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 5vw, 3rem);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-/* ─── LOADER ─── */
-#loader {
-  position: fixed; inset: 0; z-index: 9000;
-  background: var(--dark);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2rem;
-  transition: opacity .9s ease, visibility .9s ease;
-}
-#loader.gone { opacity: 0; visibility: hidden; pointer-events: none; }
-.ld-logo {
-  font-family: 'Orbitron', monospace; font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 900; letter-spacing: 10px;
-  background: linear-gradient(135deg, var(--gold), var(--red));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ld-bar-wrap {
-  width: 180px; height: 2px;
-  background: #111; border-radius: 1px; overflow: hidden;
-}
-.ld-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--red), var(--gold));
-  width: 0; animation: ldBar 1.8s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes ldBar { to { width: 100%; } }
-.ld-sub {
-  font-size: .65rem; letter-spacing: 5px; color: var(--muted); text-transform: uppercase;
-}
+    /* ── Section Label ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 500;
-  padding: 1.1rem 3rem;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(4,4,4,.85);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid rgba(201,168,76,.07);
-}
-.nav-logo {
-  font-family: 'Orbitron', monospace; font-size: 1rem;
-  font-weight: 900; letter-spacing: 5px;
-  background: linear-gradient(135deg, var(--gold), var(--red));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.nav-links { display: flex; gap: 2.2rem; list-style: none; }
-.nav-links a {
-  color: var(--muted); text-decoration: none;
-  font-size: .7rem; letter-spacing: 3px; text-transform: uppercase;
-  transition: color .3s; position: relative; padding-bottom: 4px;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, var(--red), var(--gold));
-  transform: scaleX(0); transform-origin: right; transition: transform .35s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: #fff;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
 
-/* ─── HERO ─── */
-.hero {
-  position: relative; z-index: 1;
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 8rem 2rem 5rem; overflow: hidden;
-}
-.hero-bg-text {
-  position: absolute;
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(6rem, 22vw, 20rem); font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(201,168,76,.03);
-  user-select: none; pointer-events: none;
-  letter-spacing: 12px; z-index: 0;
-}
-.hero-content {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 2rem; text-align: center;
-}
+    .section-sub {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 58ch;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+    }
 
-/* avatar */
-.avatar-wrap { position: relative; width: 200px; height: 200px; }
-.ring { position: absolute; border-radius: 50%; pointer-events: none; }
-.ring-outer {
-  inset: -18px;
-  background: conic-gradient(from 0deg, var(--gold) 0%, var(--red) 40%, transparent 60%, var(--gold) 100%);
-  animation: spin 7s linear infinite;
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 3px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 3px));
-  opacity: .7;
-}
-.ring-inner {
-  inset: -7px;
-  background: conic-gradient(from 180deg, var(--red), transparent 50%, var(--gold) 50%, transparent);
-  animation: spin 3.5s linear infinite reverse;
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
-  opacity: .5;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
 
-.avatar {
-  position: relative; z-index: 2;
-  width: 200px; height: 200px; border-radius: 50%;
-  object-fit: cover; display: block;
-  border: 3px solid rgba(201,168,76,.18);
-  background: #0d0d0d; cursor: pointer;
-  transition: transform .4s, box-shadow .4s, filter .4s;
-}
-.avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 50px rgba(201,168,76,.35), 0 0 100px rgba(201,168,76,.1);
-  filter: brightness(1.08);
-}
-.avatar-fallback {
-  position: absolute; inset: 0; z-index: 3; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #1a0a0a, #080810);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Orbitron', monospace; font-size: 2.8rem; font-weight: 900;
-  color: var(--gold); pointer-events: none;
-  opacity: 0; transition: opacity .3s;
-}
-.avatar-fallback.show { opacity: 1; }
-.avatar-edit-btn {
-  position: absolute; bottom: 6px; right: 6px; z-index: 4;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--red); border: 2px solid var(--dark);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 13px; color: #fff;
-  transition: background .25s, transform .25s;
-}
-.avatar-edit-btn:hover { background: var(--gold); transform: scale(1.15); }
-#avatarInput { display: none; }
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      min-height: 48px;
+      white-space: nowrap;
+    }
 
-/* hero text — glitch */
-.hero-name {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(2.8rem, 9vw, 6rem); font-weight: 900;
-  letter-spacing: 8px; line-height: 1;
-  background: linear-gradient(135deg, var(--gold-light) 0%, #eeeeee 45%, var(--red-light) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;filter: drop-shadow(0 0 50px rgba(201,168,76,.2));
-  position: relative;cursor: default;
-}
-/* glitch layers */
-.hero-name::before,
-.hero-name::after {
-  content: attr(data-text);
-  position: absolute; top: 0; left: 0; right: 0;
-  font-family: 'Orbitron', monospace;
-  font-size: inherit; font-weight: 900; letter-spacing: 8px;
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  opacity: 0;
-  pointer-events: none;
-}
-.hero-name::before {
-  background: linear-gradient(135deg, var(--red-light), var(--red));
-  animation: glitch1 4s infinite;
-}
-.hero-name::after {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  animation: glitch2 4s infinite;
-}
-@keyframes glitch1 {
-  0%,94%,100% { opacity:0; transform:none; }
-  95% { opacity:.7; transform:translate(-3px,1px) skewX(-2deg); clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%); }
-  96% { opacity:.5; transform:translate(3px,-1px) skewX(2deg); clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%); }97% { opacity:0; }
-}
-@keyframes glitch2 {
-  0%,91%,100% { opacity:0; transform:none; }
-  92% { opacity:.6; transform:translate(4px,2px) skewX(3deg); clip-path:polygon(0 50%,100% 50%,100% 65%,0 65%); }
-  93% { opacity:.4; transform:translate(-2px,-2px); clip-path:polygon(0 10%,100% 10%,100% 28%,0 28%); }
-  94% { opacity:0; }
-}
+    .btn-primary {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-primary:hover {
+      background: var(--gold);
+      color: #080808;
+    }
 
-.hero-role {
-  font-size: .72rem; letter-spacing: 7px; text-transform: uppercase;
-  color: var(--gold); opacity: .65;
-}
-.hero-quote-box {
-  max-width: 440px;
-  background: rgba(192,57,43,.04);
-  border: 1px solid rgba(192,57,43,.2);
-  border-radius: 14px; padding: 1.4rem 2rem;
-  font-size: .88rem; color: #777;
-  line-height: 1.9; font-style: italic;
-  position: relative;
-}
-.hero-quote-box::before {
-  content: '❝'; position: absolute; top: -14px; right: 18px;
-  font-size: 2.2rem; color: var(--red); font-style: normal; line-height: 1;
-}
-.hero-badges { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; }
-.badge {
-  display: inline-flex; align-items: center; gap: .4rem;
-  padding: .38rem 1.1rem; border-radius: 30px;
-  font-size: .68rem; letter-spacing: 2px; text-transform: uppercase;
-  font-weight: 600;
-}
-.badge-r { background: var(--red-dim); border: 1px solid rgba(192,57,43,.4); color: var(--red-light); }
-.badge-g { background: var(--gold-dim); border: 1px solid rgba(201,168,76,.4); color: var(--gold-light); }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.6);
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.4);
+      color: #fff;
+    }
 
-.scroll-hint {
-  position: absolute; bottom: 2.5rem; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: .4rem;
-  color: var(--muted); font-size: .6rem; letter-spacing: 4px; text-transform: uppercase;
-  animation: bounceScroll 2.2s ease-in-out infinite;
-}
-.scroll-hint .line { width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); }
-@keyframes bounceScroll {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50%      { transform: translateX(-50%) translateY(10px); }
-}
+    .btn-arrow { font-size: 0.9rem; transition: transform 0.2s; }
+    .btn:hover .btn-arrow { transform: translateX(-3px); }
 
-/* ─── LAYOUT ─── */
-.section-wrap { position: relative; z-index: 1; }
-section { max-width: 1020px; margin: 0 auto; padding: 7rem 2rem; }
-.sec-head {
-  display: flex; align-items: center; gap: 1.2rem; margin-bottom: 3.5rem;
-}
-.sec-num {
-  font-family: 'Orbitron', monospace; font-size: .65rem;
-  color: var(--red); letter-spacing: 2px; flex-shrink: 0;
-}
-.sec-title {
-  font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 900;
-  color: var(--gold); letter-spacing: 2px; white-space: nowrap;
-}
-.sec-line {
-  flex: 1; height: 1px;
-  background: linear-gradient(to left, transparent, rgba(201,168,76,.18));
-}
-.divider {
-  position: relative; z-index: 1; max-width: 1020px; margin: 0 auto;
-  height: 1px; background: linear-gradient(to right, transparent, rgba(201,168,76,.1), transparent);
-}
+    /* ════════════════════════════
+       NAVBAR
+    ════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.1rem clamp(1.25rem, 5vw, 3rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    #navbar.scrolled { border-bottom-color: var(--border); }
 
-/* ─── ABOUT ─── */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1.2rem; }
-.icard {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 2rem;
-  position: relative; overflow: hidden;
-  transition: border-color .4s, transform .35s, box-shadow .4s;
-}
-.icard::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, var(--red), var(--gold));
-  transform: scaleX(0); transform-origin: left; transition: transform .4s;
-}
-.icard:hover { border-color: rgba(201,168,76,.25); transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
-.icard:hover::before { transform: scaleX(1); }
-.icard-label { font-size: .62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: .8rem; }
-.icard-val { font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: .5rem; font-family: 'Orbitron', monospace; }
-.icard-sub { font-size: .82rem; color: var(--muted); line-height: 2; }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-decoration: none;
+    }
 
-.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.stat-box {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1.5rem 1rem; text-align: center;
-  transition: border-color .3s, transform .3s, box-shadow .3s;
-}
-.stat-box:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 15px 40px rgba(201,168,76,.08); }
-.stat-num {
-  font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900;
-  background: linear-gradient(135deg, var(--gold), var(--red));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.stat-lbl { font-size: .65rem; color: var(--muted); margin-top: .35rem; letter-spacing: 2px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
 
-/* ─── SKILLS ─── */
-.skills-wrap { display: flex; flex-direction: column; gap: 1.4rem; }
-.skill-group {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 2rem 2.2rem;
-  transition: border-color .3s, box-shadow .3s;
-}
-.skill-group:hover { border-color: rgba(201,168,76,.12); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
-.sg-title { font-size: .62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 1.8rem; }
-.sk { margin-bottom: 1.5rem; }
-.sk:last-child { margin-bottom: 0; }
-.sk-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: .6rem; }
-.sk-name { font-size: .86rem; color: #bbb; display: flex; align-items: center; gap: .7rem; }
-.sk-icon { font-size: 1rem; }
-.sk-pct { font-family: 'Orbitron', monospace; font-size: .72rem; color: var(--gold); }
-.sk-track { height: 3px; background: #141414; border-radius: 2px; overflow: hidden; position: relative; }
-.sk-track::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.03) 50%, transparent 100%);
-  animation: shimmer 2s linear infinite;
-}
-@keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
-.sk-fill {
-  height: 100%; border-radius: 2px;
-  background: linear-gradient(to right, var(--red), var(--gold));
-  width: 0; transition: width 1.9s cubic-bezier(.16,1,.3,1);
-  box-shadow: 0 0 8px rgba(201,168,76,.3);
-}
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
 
-/* ─── INTERESTS ─── */
-.interests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.1rem;
-}
-.int-card {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 1.7rem;
-  position: relative; overflow: hidden;
-  transition: border-color .3s, transform .3s, box-shadow .3s;
-}
-.int-card::after {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(to right, var(--red), var(--gold));
-  transform: scaleX(0); transform-origin: left; transition: transform .4s;
-}
-.int-card:hover { border-color: rgba(201,168,76,.22); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.4); }
-.int-card:hover::after { transform: scaleX(1); }
-.int-icon { font-size: 2.2rem; display: block; margin-bottom: .9rem; }
-.int-name { font-size: .92rem; font-weight: 700; color: #ccc; margin-bottom: .4rem; letter-spacing: 1px; }
-.int-desc { font-size: .78rem; color: var(--muted); line-height: 1.8; }
+    .nav-cta {
+      padding: 0.5rem 1.1rem !important;
+      min-height: 36px !important;
+      font-size: 0.72rem !important;
+    }
 
-/* football */
-.football-box {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 18px; padding: 2rem 2.2rem; margin-top: 1.4rem;
-}
-.fb-title { font-size: .62rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; }
-.teams-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.team-card {
-  background: var(--card2); border: 1px solid #181818;
-  border-radius: 14px; padding: 1.3rem 1rem; text-align: center;
-  transition: all .3s;
-}
-.team-card:hover { transform: translateY(-5px); }
-.team-card.brighton:hover { border-color: #0057B8; box-shadow: 0 0 22px rgba(0,87,184,.18); }
-.team-card.real:hover     { border-color: var(--gold); box-shadow: 0 0 22px rgba(201,168,76,.18); }
-.team-card.barca:hover    { border-color: #a50044; box-shadow: 0 0 22px rgba(165,0,68,.18); }
-.team-emoji { font-size: 2.5rem; display: block; margin-bottom: .5rem; }
-.team-name  { font-size: .78rem; font-weight: 700; color: #ccc; margin-bottom: .3rem; }
-.team-tag   { font-size: .62rem; letter-spacing: 2px; color: var(--muted); }
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-dim);
+      transition: all 0.25s;
+    }
 
-.tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.4rem; }
-.tag {
-  padding: .35rem .95rem; border-radius: 30px;
-  font-size: .7rem; border: 1px solid #1d1d1d;
-  color: var(--muted); cursor: default;
-  transition: all .25s;
-}
-.tag:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); transform: translateY(-2px); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 60px; left: 0; right: 0;
+        background: rgba(8,8,8,0.97);
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        align-items: flex-start;
+      }
+    }
 
-/* ─── TIMELINE ─── */
-.timeline { position: relative; padding: 0 0 0 2rem; }
-.timeline::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--red) 20%, var(--gold) 60%, transparent);
-}
-.tl-item {
-  position: relative; margin-bottom: 2.5rem; padding-left: 2rem;
-  opacity: 0; transform: translateX(-20px);
-  transition: opacity .6s ease, transform .6s ease;
-}
-.tl-item.vis { opacity: 1; transform: translateX(0); }
-.tl-dot {
-  position: absolute; left: -2.5rem; top: .3rem;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: var(--red); border: 2px solid var(--dark);
-  box-shadow: 0 0 10px var(--red);
-  transition: background .3s, box-shadow .3s;
-}
-.tl-item:hover .tl-dot { background: var(--gold); box-shadow: 0 0 15px var(--gold); }
-.tl-item.future .tl-dot { background: transparent; border-color: var(--gold); box-shadow: 0 0 10px rgba(201,168,76,.4); }
-.tl-year {
-  font-family: 'Orbitron', monospace; font-size: .65rem;
-  color: var(--red); letter-spacing: 3px; margin-bottom: .3rem;
-}
-.tl-item.future .tl-year { color: var(--gold); }
-.tl-title { font-size: .95rem; font-weight: 700; color: #ccc; margin-bottom: .3rem; }
-.tl-desc { font-size: .78rem; color: var(--muted); line-height: 1.8; }
-.tl-badge {
-  display: inline-block; margin-top: .5rem;
-  padding: .2rem .7rem; border-radius: 20px; font-size: .62rem; letter-spacing: 2px;
-  border: 1px solid rgba(192,57,43,.3); color: var(--red-light); background: var(--red-dim);
-}
-.tl-item.future .tl-badge { border-color: rgba(201,168,76,.3); color: var(--gold-light); background: var(--gold-dim); }
+    /* ════════════════════════════
+       HERO
+    ════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding-top: 80px;
+      overflow: hidden;
+    }
 
-/* ─── INFINITE ─── */
-.inf-section {
-  background: linear-gradient(135deg, #080404, #090608, #050505);
-  border: 1px solid rgba(192,57,43,.18);
-  border-radius: 22px; padding: 3.5rem 3rem;
-  display: grid; grid-template-columns: 1fr auto; gap: 3.5rem; align-items: center;
-}
-.inf-title {
-  font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900;
-  color: var(--red); letter-spacing: 5px; margin-bottom: 1rem;
-  filter: drop-shadow(0 0 20px rgba(192,57,43,.4));
-  position: relative; cursor: default;
-}
-.inf-title::before, .inf-title::after {
-  content: attr(data-text);
-  position: absolute; top: 0; left: 0;
-  font-family: 'Orbitron', monospace; font-size: inherit; font-weight: 900; letter-spacing: 5px;
-  opacity: 0; pointer-events: none;
-}
-.inf-title::before { color: var(--gold); animation: glitch3 5s infinite 1s; }
-.inf-title::after  { color: #fff; animation: glitch4 5s infinite 1.2s; }
-@keyframes glitch3 {
-  0%,93%,100% { opacity:0; transform:none; }
-  94% { opacity:.6; transform:translate(-4px,0) skewX(-4deg); clip-path:polygon(0 30%,100% 30%,100% 55%,0 55%); }95% { opacity:0; }
-}
-@keyframes glitch4 {
-  0%,90%,100% { opacity:0; transform:none; }
-  91% { opacity:.4; transform:translate(4px,2px); clip-path:polygon(0 65%,100% 65%,100% 80%,0 80%); }
-  92% { opacity:0; }
-}
-.inf-desc { font-size: .86rem; color: #666; line-height: 2; margin-bottom: 2rem; }
-.inf-traits { display: flex; flex-direction: column; gap: .9rem; }
-.trait { display: flex; align-items: center; gap: .9rem; font-size: .82rem; color: #777; }
-.trait-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0; box-shadow: 0 0 6px var(--red); }
-.inf-img {
-  width: 210px; height: 210px; border-radius: 22px;
-  object-fit: cover; display: block;border: 2px solid rgba(192,57,43,.3);
-  filter: drop-shadow(0 0 30px rgba(192,57,43,.25));
-  transition: filter .4s, transform .4s;
-  background: #0d0808;
-}
-.inf-img:hover {
-  filter: drop-shadow(0 0 50px rgba(201,168,76,.45));
-  transform: scale(1.04);
-}
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
 
-/* ─── TOAST ─── */
-#toast {
-  position: fixed; bottom: 2rem; left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: linear-gradient(135deg, rgba(12,12,12,.97), rgba(16,8,8,.97));
-  border: 1px solid rgba(201,168,76,.25); border-radius: 40px;
-  padding: .6rem 1.6rem; font-size: .75rem; letter-spacing: 2px;
-  color: var(--gold); z-index: 9998;
-  backdrop-filter: blur(20px);
-  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s;
-  opacity: 0; pointer-events: none;
-  box-shadow: 0 10px 40px rgba(0,0,0,.5);
-}
-#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 3rem);
+    }
 
-/* ─── FOOTER ─── */
-footer {
-  position: relative; z-index: 1;
-  border-top: 1px solid #0e0e0e;
-  padding: 4rem 2rem; text-align: center;
-}
-.footer-logo {
-  font-family: 'Orbitron', monospace; font-size: 1.8rem; font-weight: 900;
-  letter-spacing: 8px;
-  background: linear-gradient(135deg, var(--gold), var(--red));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: .8rem;
-}
-.footer-sub { color: var(--muted); font-size: .68rem; letter-spacing: 3px; }
-.footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; }
-.footer-links a {
-  color: var(--muted); text-decoration: none; font-size: .68rem;
-  letter-spacing: 2px; text-transform: uppercase;
-  transition: color .25s;
-}
-.footer-links a:hover { color: var(--gold); }
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
 
-/* ─── CONTACT ─── */
-.contact-row {
-  display: flex; justify-content: center; gap: 1.2rem;
-  margin: 1.8rem 0; flex-wrap: wrap;
-}
-.contact-btn {
-  display: inline-flex; align-items: center; gap: .6rem;
-  padding: .6rem 1.4rem; border-radius: 40px;
-  text-decoration: none; font-size: .74rem;
-  letter-spacing: 2px; font-weight: 600;
-  border: 1px solid; transition: all .3s;
-  cursor: pointer; background: none; font-family: inherit;
-}
-.contact-btn.ig { color: #e1306c; border-color: rgba(225,48,108,.35); background: rgba(225,48,108,.06); }
-.contact-btn.ig:hover { background: rgba(225,48,108,.15); box-shadow: 0 0 22px rgba(225,48,108,.25); transform: translateY(-3px); }
-.contact-btn.tg { color: #29b6f6; border-color: rgba(41,182,246,.35); background: rgba(41,182,246,.06); }
-.contact-btn.tg:hover { background: rgba(41,182,246,.15); box-shadow: 0 0 22px rgba(41,182,246,.25); transform: translateY(-3px); }
-.contact-btn.gm { color: var(--gold); border-color: rgba(201,168,76,.35); background: var(--gold-dim); }
-.contact-btn.gm:hover { background: rgba(201,168,76,.18); box-shadow: 0 0 22px rgba(201,168,76,.25); transform: translateY(-3px); }
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.03em;
+      color: #fff;
+      max-width: 14ch;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
 
-/* copy inline */
-.copy-inline {
-  display: inline-flex; align-items: center; gap: .4rem;
-  color: var(--muted); font-size: .68rem; letter-spacing: 2px;
-  cursor: pointer; transition: color .25s; border: none; background: none;
-  font-family: inherit; padding: .3rem .6rem;
-}
-.copy-inline:hover { color: var(--gold); }
-.copy-inline svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .hero-title .accent { color: var(--gold); }
 
-/* ─── REVEAL ─── */
-.reveal {
-  opacity: 0; transform: translateY(36px);
-  transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
-}
-.reveal.vis { opacity: 1; transform: translateY(0); }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: var(--text-dim);
+      max-width: 52ch;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.4rem; }
-  .nav-links { gap: 1.4rem; }
-  .about-grid { grid-template-columns: 1fr; }
-  .inf-section { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-  .inf-img { width: 170px; height: 170px; margin: 0 auto; }
-  .inf-traits { align-items: center; }
-}
-@media (max-width: 500px) {
-  .nav-links li:nth-child(n+4) { display: none; }
-  .stat-row { grid-template-columns: 1fr 1fr; }
-  .teams-grid { grid-template-columns: 1fr 1fr; }
-}
-</style>
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 4rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+
+    .hero-terminal {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-faint);
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      max-width: 460px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1s forwards;
+    }
+    .hero-terminal .prompt { color: var(--gold); margin-left: 0.4rem; }
+    .cursor {
+      display: inline-block;
+      width: 8px; height: 1em;
+      background: var(--gold);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      50% { opacity: 0; }}
+
+    /* ════════════════════════════
+       INTRO
+    ════════════════════════════ */
+    #intro {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    #intro section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .intro-text p {
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .intro-text p:last-child { margin-bottom: 0; }
+    .intro-text strong { color: var(--text); font-weight: 500; }
+
+    .intro-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;}
+    .stat-card {
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+    }
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;margin-bottom: 0.4rem;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    @media (max-width: 768px) {
+      #intro section { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ════════════════════════════
+       SERVICES
+    ════════════════════════════ */
+    #services { background: var(--bg); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 2rem;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 0;
+      background: var(--gold);
+      transition: height 0.3s;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.02); }
+    .service-card:hover::before { height: 100%; }
+
+    .service-icon {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .service-desc {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .service-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+    }
+
+    .services-cta {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+    .services-cta p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* ════════════════════════════
+       WHY WIRIPER
+    ════════════════════════════ */
+    #why {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .why-card {
+      padding: 1.75rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .why-card:hover { border-bottom-color: var(--gold); }
+
+    .why-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;opacity: 0.7;
+    }
+    .why-title {
+      font-family: 'Vazirmatn', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .why-desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════
+       FEATURED WORK
+    ════════════════════════════ */
+    #work { background: var(--bg); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .work-card:hover {
+      border-color: rgba(201,168,76,0.3);
+      transform: translateY(-3px);
+    }
+
+    .work-img {
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+      overflow: hidden;
+      position: relative;
+    }
+    .work-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: opacity 0.3s;
+    }
+    .work-card:hover .work-img img { opacity: 1; }
+
+    .work-body { padding: 1.5rem; }
+
+    .work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .work-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 0.2rem 0.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .work-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .work-desc {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .work-outcome {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(110,231,183,0.8);
+      letter-spacing: 0.05em;
+    }
+    .work-outcome::before { content: '→ '; }
+
+    .work-cta {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .work-cta p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    /* ════════════════════════════
+       PROCESS
+    ════════════════════════════ */
+    #process {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .process-step {
+      padding: 2rem;
+      position: relative;
+      border-right: 1px solid var(--border);
+    }
+    .process-step:last-child { border-right: none; }
+
+    @media (max-width: 768px) {
+      .process-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1.75rem 0;
+      }
+      .process-step:last-child { border-bottom: none; }
+    }
+
+    .step-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold-dim);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════
+       FAQ
+    ════════════════════════════ */
+    #faq { background: var(--bg); }
+
+    .faq-list { max-width: 720px; }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: right;
+      padding: 1.25rem 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      line-height: 1.5;transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+
+    .faq-icon {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      flex-shrink: 0;transition: transform 0.25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-a {
+      display: none;
+      padding: 0 0 1.25rem 0;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      max-width: 60ch;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ════════════════════════════
+       ABOUT
+    ════════════════════════════ */
+    #about {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    #about section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-fa p {
+      color: var(--text-dim);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .about-fa strong { color: var(--text); font-weight: 500; }
+
+    .about-en {
+      padding: 2rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-right: 2px solid var(--gold);
+      direction: ltr;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .about-en-label {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      opacity: 0.7;
+    }
+    .about-en-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .about-en p {
+      font-family: 'Vazirmatn', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 768px) {
+      #about section { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ════════════════════════════
+       CONTACT
+    ════════════════════════════ */
+    #contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .contact-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #fff;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .contact-info p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .response-promise {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .response-promise::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;}
+
+    /* ── Form ── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    label .req { color: var(--gold); }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: 'Vazirmatn', sans-serif;
+      line-height: 1.5;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-faint); }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.06);
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 1rem center;
+      padding-left: 2.5rem;
+    }
+    select option { background: #1a1a1a; color: var(--text); }
+
+    textarea { resize: vertical; min-height: 130px; }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding-top: 0.5rem;
+    }
+
+    #form-status {
+      font-size: 0.875rem;
+      line-height: 1.5;}
+    #form-status.success { color: #6ee7b7; }
+    #form-status.error   { color: #fca5a5; }
+
+    /* ════════════════════════════
+       FOOTER
+    ════════════════════════════ */
+    #footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem clamp(1.25rem, 5vw, 3rem);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+    }
+    .footer-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-faint);
+    }
+
+    /* ════════════════════════════
+       REVEAL ANIMATION
+    ════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ════════════════════════════
+       REDUCED MOTION
+    ════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+      .hero-tag, .hero-title, .hero-subtitle,
+      .hero-ctas, .hero-terminal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="cursor"></div>
-<div id="cursorRing"></div>
-<canvas id="bg-canvas"></canvas>
-<div id="toast"></div>
+  <!-- ════ NAVBAR ════ -->
+  <nav id="navbar" role="navigation" aria-label="منوی اصلی">
+    <a href="#hero" class="nav-logo" aria-label="WIRIPER — صفحه اصلی">WIRIPER</a>
+    <button class="nav-burger" id="navBurger" aria-label="باز کردن منو" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#services">خدمات</a></li>
+      <li><a href="#work">نمونه‌کارها</a></li>
+      <li><a href="#process">فرآیند</a></li>
+      <li><a href="#about">درباره</a></li>
+      <li><a href="#contact" class="btn btn-primary nav-cta">شروع پروژه</a></li>
+    </ul>
+  </nav>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="ld-logo">WIRIPER</div>
-  <div class="ld-bar-wrap"><div class="ld-bar"></div></div>
-  <div class="ld-sub">Loading Identity</div>
-</div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">WIRIPER</div>
-  <ul class="nav-links">
-    <li><a href="#about">درباره</a></li>
-    <li><a href="#skills">مهارت‌ها</a></li>
-    <li><a href="#interests">علایق</a></li>
-    <li><a href="#timeline">رودمپ</a></li>
-    <li><a href="#infinite">Infinite</a></li>
-  </ul>
-</nav>
+  <!-- ════ HERO ════ -->
+  <div id="hero" role="banner">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg-text">WIRIPER</div>
-  <div class="hero-content">
-    <div class="avatar-wrap">
-      <div class="ring ring-outer"></div>
-      <div class="ring ring-inner"></div><img class="avatar" id="avatarImg"src="IMG_4363.jpeg" alt="Wiriper"
-        onclick="document.getElementById('avatarInput').click()"
-        onerror="this.style.opacity='0';document.querySelector('.avatar-fallback').classList.add('show')">
-      <div class="avatar-fallback">W</div>
-      <div class="avatar-edit-btn" onclick="document.getElementById('avatarInput').click()">✏</div>
-      <input type="file" id="avatarInput" accept="image/*">
-    </div>
+    <div class="hero-inner">
+      <p class="hero-tag">WIRIPER / Digital Studio</p>
 
-    <div class="hero-name" data-text="WIRIPER" id="heroName">WIRIPER</div>
-    <div class="hero-role">Security · Code · Identity · 1405</div>
+      <h1 class="hero-title">
+        طراحی و توسعه‌ی تجربه‌های دیجیتال<span class="accent"> دقیق</span>
+      </h1>
 
-    <div class="hero-quote-box">
-      شکست تو رو نمی‌کشه — هویتت رو می‌سازه.<br><span style="color:var(--red);font-size:.75rem;font-style:normal;opacity:.8">— Infinite × Wiriper</span>
-    </div>
-
-    <div class="hero-badges">
-      <span class="badge badge-r">◈ Infinite</span>
-      <span class="badge badge-g">Network Security</span>
-      <span class="badge badge-r">Achaemenid</span>
-      <span class="badge badge-g">Developer</span>
-    </div>
-  </div>
-  <div class="scroll-hint">
-    <div class="line"></div>
-    <span>scroll</span>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ABOUT -->
-<div class="section-wrap">
-<section id="about" class="reveal">
-  <div class="sec-head">
-    <span class="sec-num">01</span>
-    <h2 class="sec-title">درباره من</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="about-grid">
-    <div class="icard">
-      <div class="icard-label">Identity</div>
-      <div class="icard-val">مبین</div>
-      <div class="icard-sub">۱۷ ساله · مهرشهر<br>متولد ۲۵ اسفند ۱۳۸۷</div>
-    </div>
-    <div class="icard">
-      <div class="icard-label">Alias</div>
-      <div class="icard-val" style="color:var(--red)">Wiriper</div>
-      <div class="icard-sub">Network Security Enthusiast<br>Developer · Strategist<br>هخامنشی · آینده‌نگر</div>
-    </div>
-  </div>
-  <div class="stat-row">
-    <div class="stat-box"><div class="stat-num">17</div><div class="stat-lbl">سال سن</div></div>
-    <div class="stat-box"><div class="stat-num">∞</div><div class="stat-lbl">پتانسیل</div></div>
-    <div class="stat-box"><div class="stat-num">1405</div><div class="stat-lbl">شروع</div></div>
-  </div>
-</section>
-</div>
-
-<div class="divider"></div>
-
-<!-- SKILLS -->
-<div class="section-wrap">
-<section id="skills" class="reveal">
-  <div class="sec-head">
-    <span class="sec-num">02</span>
-    <h2 class="sec-title">مهارت‌ها</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="skills-wrap">
-    <div class="skill-group">
-      <div class="sg-title">Technical Skills</div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">🔐</span>امنیت شبکه</span><span class="sk-pct">85%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="85"></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">💻</span>برنامه‌نویسی</span><span class="sk-pct">80%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="80"></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">🌐</span>وب دولوپمنت</span><span class="sk-pct">75%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="75"></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">🧠</span>تحلیل و استراتژی</span><span class="sk-pct">92%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="92"></div></div>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="sg-title">Soft Skills</div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">🎯</span>تمرکز و هدف‌گذاری</span><span class="sk-pct">90%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="90"></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">⚔️</span>مقاومت در برابر فشار</span><span class="sk-pct">88%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="88"></div></div>
-      </div>
-      <div class="sk">
-        <div class="sk-top"><span class="sk-name"><span class="sk-icon">🗺</span>برنامه‌ریزی بلندمدت</span><span class="sk-pct">87%</span></div>
-        <div class="sk-track"><div class="sk-fill" data-w="87"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<div class="divider"></div>
-
-<!-- INTERESTS -->
-<div class="section-wrap">
-<section id="interests" class="reveal">
-  <div class="sec-head">
-    <span class="sec-num">03</span>
-    <h2 class="sec-title">علایق</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="interests-grid">
-    <div class="int-card">
-      <span class="int-icon">🔐</span>
-      <div class="int-name">امنیت شبکه</div>
-      <div class="int-desc">تخصص اصلی و هدف حرفه‌ای — شناسایی آسیب‌پذیری‌ها، دفاع سایبری و اخلاق هکری.</div>
-    </div>
-    <div class="int-card">
-      <span class="int-icon">💻</span>
-      <div class="int-name">برنامه‌نویسی</div>
-      <div class="int-desc">ساخت ابزارهای امنیتی، وب‌اپلیکیشن‌ها و اتوماسیون با کد تمیز و هدفمند.</div>
-    </div>
-    <div class="int-card">
-      <span class="int-icon">💪</span>
-      <div class="int-name">بدنسازی</div>
-      <div class="int-desc">دیسیپلین باشگاه همون دیسیپلین کدنویسیه — ذهن قوی در جسم قوی.</div>
-    </div>
-    <div class="int-card">
-      <span class="int-icon">🚗</span>
-      <div class="int-name">BMW 428i</div>
-      <div class="int-desc">قدرت، دقت و سبک — ترکیبی که هویت Wiriper رو تعریف می‌کنه.</div>
-    </div>
-    <div class="int-card">
-      <span class="int-icon">🎮</span>
-      <div class="int-name">Gaming</div>
-      <div class="int-desc">Forza Horizon · Ghost of Tsushima · FC · mo.co</div>
-    </div>
-    <div class="int-card">
-      <span class="int-icon">📺</span>
-      <div class="int-name">سریال و محتوا</div>
-      <div class="int-desc">Breaking Bad · Stranger Things · True Crime — داستان‌هایی که ذهن رو به چالش می‌کشن.</div>
-    </div></div>
-
-  <div class="football-box reveal">
-    <div class="fb-title">⚽ فوتبال</div>
-    <div class="teams-grid">
-      <div class="team-card brighton">
-        <span class="team-emoji">🔵</span>
-        <div class="team-name">Brighton</div>
-        <div class="team-tag">The Seagulls</div>
-      </div>
-      <div class="team-card real">
-        <span class="team-emoji">👑</span>
-        <div class="team-name">Real Madrid</div>
-        <div class="team-tag">Los Blancos</div>
-      </div>
-      <div class="team-card barca">
-        <span class="team-emoji">🔴</span>
-        <div class="team-name">Barcelona</div>
-        <div class="team-tag">Blaugrana</div>
-      </div>
-    </div>
-    <div class="tags">
-      <span class="tag">🏛 تاریخ هخامنشی</span>
-      <span class="tag">🎙 True Crime</span>
-      <span class="tag">🌀 Stranger Things</span>
-      <span class="tag">⚗ Breaking Bad</span>
-      <span class="tag">🎵 موزیک</span>
-      <span class="tag">🏺 ایران باستان</span>
-    </div>
-  </div>
-</section>
-</div>
-
-<div class="divider"></div>
-
-<!-- TIMELINE -->
-<div class="section-wrap">
-<section id="timeline" class="reveal">
-  <div class="sec-head">
-    <span class="sec-num">04</span>
-    <h2 class="sec-title">رودمپ</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-year">۱۴۰۵ — شروع</div>
-      <div class="tl-title">ساخت هویت Wiriper</div>
-      <div class="tl-desc">شروع رسمی مسیر با پرتفولیوی شخصی، فعالیت در امنیت شبکه و توسعه وب.</div>
-      <span class="tl-badge">✓ انجام شد</span>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-year">۱۴۰۵ — فاز ۱</div>
-      <div class="tl-title">یادگیری پایه‌های Cybersecurity</div>
-      <div class="tl-desc">CompTIA Security+، Networking، Linux — بنیان تخصصی برای مسیر امنیت.</div>
-      <span class="tl-badge">در حال انجام</span>
-    </div>
-    <div class="tl-item future">
-      <div class="tl-dot"></div>
-      <div class="tl-year">۱۴۰۶ — هدف</div>
-      <div class="tl-title">اولین CTF و Bug Bounty</div>
-      <div class="tl-desc">شرکت در مسابقات Capture The Flag و شروع گزارش‌دهی آسیب‌پذیری.</div>
-      <span class="tl-badge">هدف آینده</span>
-    </div>
-    <div class="tl-item future">
-      <div class="tl-dot"></div>
-      <div class="tl-year">۱۴۰۷ — چشم‌انداز</div>
-      <div class="tl-title">Penetration Tester حرفه‌ای</div>
-      <div class="tl-desc">CEH یا OSCP — تبدیل شدن به یک Ethical Hacker شناخته‌شده.</div>
-      <span class="tl-badge">هدف آینده</span>
-    </div>
-    <div class="tl-item future">
-      <div class="tl-dot"></div>
-      <div class="tl-year">∞ — بی‌نهایت</div>
-      <div class="tl-title">Infinite Legacy</div>
-      <div class="tl-desc">ساختن ابزارهای امنیتی اوپن‌سورس و تأثیر دائمی در جامعه امنیت سایبری.</div>
-      <span class="tl-badge">هدف نهایی</span>
-    </div>
-  </div>
-</section>
-</div>
-
-<div class="divider"></div>
-
-<!-- INFINITE -->
-<div class="section-wrap">
-<section id="infinite" class="reveal">
-  <div class="sec-head">
-    <span class="sec-num">05</span>
-    <h2 class="sec-title">هویت بصری</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="inf-section">
-    <div>
-      <div class="inf-title" data-text="INFINITE">INFINITE</div>
-      <p class="inf-desc">
-        شخصیت منتخب Wiriper از Sonic Forces —
-        Anti-hero‌ای که پس از شکست به قدرتمندترین تبدیل شد.
-        موهای تیره، ماسک قرمز، هویت مستقل و استراتژی بی‌نظیر.
-        نمادی از کسی که از خاکستر دوباره می‌سازه.
+      <p class="hero-subtitle">
+        وب‌سایت‌ها و محصولات دیجیتالی که هم زیبا دیده می‌شوند، هم درست کار می‌کنند —
+        با تمرکز بر سرعت، امنیت و جزئیات.
       </p>
-      <div class="inf-traits">
-        <div class="trait"><div class="trait-dot"></div>هویت مستقل پس از شکست</div>
-        <div class="trait"><div class="trait-dot"></div>قدرت استراتژیک و محاسبه‌گر</div>
-        <div class="trait"><div class="trait-dot"></div>ظاهر تاریک، درون پیچیده</div>
-        <div class="trait"><div class="trait-dot"></div>هرگز تسلیم نمی‌شه</div>
-        <div class="trait"><div class="trait-dot"></div>قدرت از درد ساخته می‌شه</div>
+
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">
+          شروع یک پروژه <span class="btn-arrow">←</span>
+        </a><a href="#work" class="btn btn-secondary">
+          دیدن نمونه‌کارها
+        </a>
+      </div>
+
+      <div class="hero-terminal" aria-hidden="true">
+        <span class="prompt">$</span>
+        <span id="typed-text"></span><span class="cursor"></span>
       </div>
     </div>
-    <img class="inf-img" src="IMG_4363.jpeg" alt="Infinite"
-      onerror="this.style.display='none'">
-  </div>
-</section>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">WIRIPER</div>
-  <div class="footer-sub" style="margin-bottom:.5rem">ارتباط با من</div>
-
-  <div class="contact-row">
-    <a class="contact-btn ig" href="https://instagram.com/wir1per" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      @wir1per
-    </a>
-    <a class="contact-btn tg" href="https://t.me/w1riper" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-      @w1riper
-    </a>
-    <button class="contact-btn gm" onclick="copyText('mobinwiriper@gmail.com','ایمیل کپی شد ✓')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-      mobinwiriper@gmail.com
-    </button>
   </div>
 
-  <div style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
-    <button class="copy-inline" onclick="copyText('@wir1per','آیدی اینستاگرام کپی شد ✓')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      کپی آیدی اینستاگرام
-    </button>
-    <button class="copy-inline" onclick="copyText('@w1riper','آیدی تلگرام کپی شد ✓')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      کپی آیدی تلگرام
-    </button>
+
+  <!-- ════ INTRO ════ -->
+  <div id="intro">
+    <section aria-label="معرفی کوتاه">
+      <div class="intro-text reveal">
+        <p class="section-label">— رویکرد</p>
+        <p>
+          طراحی شلوغ، افکت‌های بی‌هدف و کدهای ناپایدار ارزش نیستند —<strong>هدر دادن توجه بازدیدکننده هستند.</strong>
+        </p>
+        <p>
+          در WIRIPER اعتقاد داریم هر پیکسل باید دلیل داشته باشد.
+          هر انیمیشن باید چیزی بگوید. هر خط کد باید قابل نگهداری باشد.
+        </p>
+        <p>
+          نتیجه؟ سایت‌هایی که بازدیدکننده را نگه می‌دارند،
+          ذهن مشتری را جلب می‌کنند و برای سال‌ها پایدار می‌مانند.
+        </p>
+      </div>
+
+      <div class="intro-stats reveal">
+        <div class="stat-card">
+          <div class="stat-number">۱۰۰٪</div>
+          <div class="stat-label">مالکیت فایل‌ها با شما</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">&lt;۲۴h</div>
+          <div class="stat-label">زمان پاسخ‌دهی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">FA+EN</div>
+          <div class="stat-label">پروژه‌های فارسی و انگلیسی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">۰</div>
+          <div class="stat-label">هزینه‌ی پنهان</div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div class="footer-links">
-    <a href="#about">درباره</a>
-    <a href="#skills">مهارت‌ها</a>
-    <a href="#interests">علایق</a>
-    <a href="#timeline">رودمپ</a>
-    <a href="#infinite">Infinite</a>
+
+  <!-- ════ SERVICES ════ -->
+  <div id="services">
+    <section aria-label="خدمات">
+      <div class="reveal">
+        <p class="section-label">— خدمات</p>
+        <h2 class="section-title">چه کاری انجام می‌دهیم؟</h2>
+        <p class="section-sub">
+          هر پروژه با یک هدف مشخص شروع می‌شود. خدمات را حول آن هدف می‌سازیم — نه بر اساس آنچه ترند است.
+        </p>
+      </div>
+
+      <div class="services-grid reveal">
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">◈</span>
+          <div class="service-name">طراحی و توسعه‌ی وب‌سایت</div>
+          <div class="service-desc">
+            وب‌سایت‌های چندصفحه‌ای کامل — با طراحی سفارشی، کد تمیز و بهینه‌سازی کامل برای موبایل و دسکتاپ.
+          </div><span class="service-tag">FULL-STACK WEB</span>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">▣</span>
+          <div class="service-name">لندینگ‌پیج و صفحات تبدیل</div>
+          <div class="service-desc">
+            صفحاتی ساخته‌شده برای یک هدف: تبدیل بازدیدکننده به مشتری. با ساختار محتوایی درست و بدون حواس‌پرتی.
+          </div>
+          <span class="service-tag">CONVERSION-FOCUSED</span>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">⬡</span>
+          <div class="service-name">هویت بصری و برندینگ</div>
+          <div class="service-desc">
+            لوگو، پالت رنگی، تایپوگرافی و سیستم طراحی یکپارچه — برند شما را از ابتدا درست می‌سازیم.
+          </div>
+          <span class="service-tag">VISUAL IDENTITY</span>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">⚡</span>
+          <div class="service-name">بهینه‌سازی فنی، امنیت و سرعت</div>
+          <div class="service-desc">
+            Core Web Vitals، hardening پایه‌ای و performance tests. سایت کند و آسیب‌پذیر مشتری از دست می‌دهد.
+          </div>
+          <span class="service-tag">PERFORMANCE & SECURITY</span>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">↻</span>
+          <div class="service-name">نگهداری و پشتیبانی</div>
+          <div class="service-desc">
+            بعد از لانچ هم اینجا هستیم. آپدیت، رفع مشکل، بهبود تدریجی — بدون شروع از صفر با یک نفر دیگر.
+          </div>
+          <span class="service-tag">MAINTENANCE</span>
+        </div>
+
+        <div class="service-card">
+          <span class="service-icon" aria-hidden="true">◎</span>
+          <div class="service-name">ساختار محتوا و مشاوره‌ی UX</div>
+          <div class="service-desc">
+            گاهی مشکل کد نیست — صفحه نمی‌داند چه چیزی باید اول بگوید. محتوا را سازماندهی، پیام را شفاف می‌کنیم.
+          </div>
+          <span class="service-tag">UX DIRECTION</span>
+        </div></div>
+
+      <div class="services-cta reveal">
+        <p>مطمئن نیستید کدام خدمت مناسب شماست؟</p>
+        <a href="#contact" class="btn btn-secondary">
+          بپرسید چه چیزی برای شما مناسب است <span class="btn-arrow">←</span>
+        </a>
+      </div>
+    </section>
   </div>
-  <div class="footer-sub" style="margin-top:1.2rem">© 1405 — Infinite × Wiriper — All rights reserved</div>
-</footer>
 
-<script>
-// ── HTTPS redirect (already in <head>, belt-and-suspenders) ──
 
-// ── LOADER ──
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('gone'), 2000);
-});
+  <!-- ════ WHY ════ -->
+  <div id="why">
+    <section aria-label="چرا WIRIPER">
+      <div class="reveal">
+        <p class="section-label">— تمایز</p>
+        <h2 class="section-title">چرا WIRIPER؟</h2>
+        <p class="section-sub">
+          خروجی باید توجیه داشته باشد — نه فقط زیبا باشد.
+        </p>
+      </div>
 
-// ── CURSOR (fixed) ──
-if (window.matchMedia('(pointer: fine)').matches) {
-  const cur  = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = -200, my = -200;
-  let rx = -200, ry = -200;
+      <div class="why-grid reveal">
 
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <div class="why-title">دقت در جزئیات، نه فقط ظاهر</div>
+          <div class="why-desc">
+            هر spacing، هر انیمیشن، هر تعامل کاربری — دقیق و با هدف. طراحی خوب وقتی به چشم می‌آید که هیچ‌چیز اشتباه نباشد.
+          </div>
+        </div>
 
-  (function loop() {
-    // snap cursor dot directly to mouse
-    cur.style.transform  = `translate(calc(-50% + ${mx}px), calc(-50% + ${my}px))`;
-    // lag ring
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.transform = `translate(calc(-50% + ${rx}px), calc(-50% + ${ry}px))`;
-    requestAnimationFrame(loop);
-  })();
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <div class="why-title">فنی و بصری، هم‌زمان</div>
+          <div class="why-desc">
+            اکثر طراحان کد نمی‌دانند. اکثر توسعه‌دهندگان طراحی بلد نیستند. اینجا هر دو یک نفر است — خروجی منسجم‌تر، فرآیند کوتاه‌تر.
+          </div>
+        </div>
 
-  document.querySelectorAll('a,button,.avatar,.tag,.team-card,.int-card,.icard,.avatar-edit-btn,.tl-item').forEach(el => {
-    el.addEventListener('mouseenter', () => { cur.classList.add('h'); ring.classList.add('h'); });
-    el.addEventListener('mouseleave', () => { cur.classList.remove('h'); ring.classList.remove('h'); });
-  });
-}
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <div class="why-title">شفافیت در فرآیند</div>
+          <div class="why-desc">
+            از اول می‌گوییم چه می‌کنیم، چه زمانی تحویل می‌دهیم و چه چیزی از شما لازم داریم. بدون غافلگیری.
+          </div>
+        </div>
 
-// ── PARTICLES with mouse interaction ──
-(function () {
-  const c   = document.getElementById('bg-canvas');
-  const ctx = c.getContext('2d');
-  let W = 0, H = 0;
-  let mouse = { x: -999, y: -999 };
+        <div class="why-card">
+          <div class="why-num">04</div>
+          <div class="why-title">مالکیت کامل با شماست</div>
+          <div class="why-desc">
+            همه‌ی کدها، فایل‌ها و دسترسی‌ها در اختیار خود شماست. هیچ وابستگی اجباری در کار نیست.
+          </div>
+        </div></div>
+    </section>
+  </div>
 
-  const resize = () => { W = c.width = innerWidth; H = c.height = innerHeight; };
-  resize();
-  window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
 
-  const COLS = ['rgba(201,168,76,.6)','rgba(192,57,43,.6)','rgba(255,255,255,.3)'];
-  const pts = Array.from({ length: 70 }, () => ({
-    x:  Math.random() * innerWidth,
-    y:  Math.random() * innerHeight,
-    ox: 0, oy: 0, // original velocity
-    vx: (Math.random() - .5) * .35,
-    vy: -(Math.random() * .5 + .08),
-    r:  Math.random() * 1.5 + .4,
-    c:  COLS[Math.random() * 3 | 0]
-  }));
-  pts.forEach(p => { p.ox = p.vx; p.oy = p.vy; });
+  <!-- ════ WORK ════ -->
+  <div id="work">
+    <section aria-label="نمونه‌کارها">
+      <div class="reveal">
+        <p class="section-label">— نمونه‌کارها</p>
+        <h2 class="section-title">پروژه‌های انتخابی</h2>
+        <p class="section-sub">
+          هر پروژه یک مشکل واقعی داشت. اینجا نشان می‌دهیم چطور حل شد.
+        </p>
+      </div>
 
-  const CONNECT_DIST = 110;
-  const MOUSE_REPEL  = 90;
+      <div class="work-grid reveal">
 
-  (function draw() {
-    ctx.clearRect(0, 0, W, H);
+        <article class="work-card">
+          <div class="work-img" aria-label="پیش‌نمایش پروژه">
+            <!-- تصویر پروژه را اینجا قرار دهید -->
+            <span>PROJECT PREVIEW</span>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="work-tag">WEB DESIGN</span>
+              <span class="work-tag">DEVELOPMENT</span>
+            </div>
+            <h3 class="work-title">نام پروژه / کلاینت</h3>
+            <p class="work-desc">
+              توضیح کوتاه از مشکل اولیه و آنچه ساخته شد. چه چالشی وجود داشت و چه رویکردی گرفته شد.
+            </p>
+            <div class="work-outcome">نتیجه‌ی قابل‌اندازه‌گیری را اینجا بنویسید</div>
+          </div>
+        </article>
 
-    // connections
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < CONNECT_DIST) {
-          ctx.globalAlpha = (1 - d / CONNECT_DIST) * .2;
-          ctx.strokeStyle = 'rgba(201,168,76,1)';
-          ctx.lineWidth   = .6;
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.stroke();
-        }
-      }
-    }
+        <article class="work-card">
+          <div class="work-img" aria-label="پیش‌نمایش پروژه">
+            <span>PROJECT PREVIEW</span>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="work-tag">LANDING PAGE</span>
+              <span class="work-tag">BRANDING</span>
+            </div>
+            <h3 class="work-title">نام پروژه / کلاینت</h3>
+            <p class="work-desc">
+              توضیح کوتاه از مشکل اولیه و آنچه ساخته شد. چه چالشی وجود داشت و چه رویکردی گرفته شد.
+            </p>
+            <div class="work-outcome">نتیجه‌ی قابل‌اندازه‌گیری را اینجا بنویسید</div>
+          </div>
+        </article>
 
-    // particles
-    pts.forEach(p => {
-      // mouse repulsion
-      const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
-      const md  = Math.sqrt(mdx * mdx + mdy * mdy);
-      if (md < MOUSE_REPEL) {
-        const force = (1 - md / MOUSE_REPEL) * 1.8;
-        p.vx += (mdx / md) * force * .06;
-        p.vy += (mdy / md) * force * .06;
-      }
-      // ease back to original velocity
-      p.vx += (p.ox - p.vx) * .025;
-      p.vy += (p.oy - p.vy) * .025;
+        <article class="work-card">
+          <div class="work-img" aria-label="پیش‌نمایش پروژه">
+            <span>PROJECT PREVIEW</span>
+          </div>
+          <div class="work-body">
+            <div class="work-tags">
+              <span class="work-tag">OPTIMIZATION</span>
+              <span class="work-tag">PERFORMANCE</span>
+            </div>
+            <h3 class="work-title">نام پروژه / کلاینت</h3>
+            <p class="work-desc">
+              توضیح کوتاه از مشکل اولیه و آنچه ساخته شد. چه چالشی وجود داشت و چه رویکردی گرفته شد.
+            </p>
+            <div class="work-outcome">نتیجه‌ی قابل‌اندازه‌گیری را اینجا بنویسید</div>
+          </div>
+        </article>
 
-      p.x += p.vx;
-      p.y += p.vy;
+      </div>
 
-      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
-      if (p.x < 0 || p.x > W) p.vx *= -1;
+      <div class="work-cta reveal">
+        <p>پروژه‌ی بعدی می‌تواند مال شما باشد.</p>
+        <a href="#contact" class="btn btn-primary">
+          شروع یک پروژه <span class="btn-arrow">←</span>
+        </a>
+      </div>
+    </section>
+  </div>
 
-      ctx.globalAlpha = .5;
-      ctx.fillStyle = p.c;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
+
+  <!-- ════ PROCESS ════ -->
+  <div id="process">
+    <section aria-label="فرآیند کار">
+      <div class="reveal">
+        <p class="section-label">— فرآیند</p>
+        <h2 class="section-title">چطور کار می‌کنیم؟</h2>
+        <p class="section-sub">
+          شفافیت در هر مرحله — می‌دانید چه اتفاقی می‌افتد، چه زمانی و چرا.
+        </p>
+      </div>
+
+      <div class="process-steps reveal">
+
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">کشف و تعریف</div>
+          <div class="step-desc">
+            اول می‌شنویم. هدف پروژه، مخاطب هدف، محدودیت‌ها و انتظارات را با هم مشخص می‌کنیم.
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">طراحی و تأیید</div>
+          <div class="step-desc">
+            پیش از نوشتن کد، ساختار بصری ارائه می‌شود. فقط بعد از تأیید وارد مرحله‌ی بعد می‌شویم.
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">توسعه و پیاده‌سازی</div>
+          <div class="step-desc">
+            کد تمیز، واکنش‌گرا و سریع. با تست روی موبایل، دسکتاپ و مرورگرهای مختلف.
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">تحویل و پشتیبانی</div>
+          <div class="step-desc">
+            فایل‌ها، دسترسی‌ها و آموزش تحویل داده می‌شود. یک دوره‌ی پشتیبانی کوتاه شامل همه‌ی پروژه‌هاست.
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ════ FAQ ════ -->
+  <div id="faq">
+    <section aria-label="سؤالات متداول">
+      <div class="reveal">
+        <p class="section-label">— FAQ</p>
+        <h2 class="section-title">سؤالات متداول</h2>
+      </div>
+
+      <div class="faq-list reveal" role="list">
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            هزینه‌ی یک پروژه چقدر است؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            هر پروژه متفاوت است. یک لندینگ‌پیج ساده با یک وب‌سایت چندصفحه‌ای قیمت یکسانی ندارد. بعد از بررسی نیاز شما یک تخمین شفاف ارسال می‌شود — بدون هزینه‌ی پنهان.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            زمان تحویل چقدر است؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            معمولاً بین ۱ تا ۴ هفته، بسته به پیچیدگی پروژه. timeline دقیق را قبل از شروع مشخص می‌کنیم.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            آیا بعد از تحویل می‌توانم خودم سایت را ویرایش کنم؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            بله. کد ساده، مستند و قابل ویرایش تحویل می‌شود. اگر خواستید آموزش کوتاه هم ارائه می‌شود.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            آیا مالکیت طرح و کد با من است؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            بله، کاملاً. همه‌ی فایل‌ها، دامنه و هاست در اختیار شما باقی می‌ماند. هیچ قفل vendor یا وابستگی اجباری وجود ندارد.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            برای شروع چه چیزی لازم است؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            فقط یک توضیح کوتاه از پروژه‌تان کافی است. فرم تماس را پر کنید — ظرف ۲۴ ساعت پاسخ می‌گیرید و بقیه را با هم حل می‌کنیم.
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-q" aria-expanded="false">
+            آیا روی پروژه‌های بین‌المللی هم کار می‌کنید؟
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            بله. پروژه‌های فارسی‌زبان و انگلیسی‌زبان هر دو قابل قبول هستند.
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ════ ABOUT ════ -->
+  <div id="about">
+    <section aria-label="درباره WIRIPER">
+      <div class="about-fa reveal">
+        <p class="section-label">— درباره</p>
+        <h2 class="section-title">درباره‌ی WIRIPER</h2>
+        <p>
+          WIRIPER یک استودیو طراحی و توسعه‌ی دیجیتال است —
+          جایی که جنبه‌های <strong>فنی و بصری</strong> کار در یک نقطه با هم تلاقی پیدا می‌کنند.
+        </p>
+        <p>
+          اعتقاد داریم وب‌سایت خوب نه فقط زیباست، نه فقط سریع —<strong>هر دو هم‌زمان است.</strong>کارهایی که اینجا ساخته می‌شوند با دقت در ساختار،
+          توجه به جزئیات و درک واقعی از اینکه کاربر چطور با یک صفحه تعامل می‌کند شکل می‌گیرند.
+        </p>
+        <p>
+          اگر به دنبال خروجی‌ای هستید که هم نظر بگیرد هم کار کند، جای درستی آمده‌اید.
+        </p>
+      </div>
+
+      <div class="about-en reveal" dir="ltr">
+        <div class="about-en-label">EN / ABOUT</div>
+        <div class="about-en-title">Built with precision.<br>Designed to last.</div>
+        <p>
+          WIRIPER is a digital design and development studio focused on building
+          web experiences that are fast, deliberate, and visually distinct.
+          Every project starts with a clear goal and ends with a product that
+          earns trust — not just attention.
+        </p>
+        <br>
+        <p>
+          We work with clients who care about quality and understand that
+          good design is an investment, not a cost.
+        </p>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ════ CONTACT ════ -->
+  <div id="contact">
+    <section aria-label="تماس و شروع پروژه">
+      <div class="contact-grid">
+
+        <div class="contact-info reveal">
+          <p class="section-label">— تماس</p>
+          <h2>یک پروژه<br>دارید؟</h2>
+          <p>
+            لازم نیست همه‌چیز آماده باشد.
+            یک توضیح کوتاه از اینکه چه می‌خواهید کافی است —
+            بقیه را با هم حل می‌کنیم.
+          </p>
+          <div class="response-promise">معمولاً ظرف ۲۴ ساعت پاسخ می‌دهیم</div>
+        </div>
+
+        <form
+          class="contact-form reveal"
+          id="contactForm"
+          action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+          method="POST"
+          novalidate
+          aria-label="فرم تماس"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">نام شما <span class="req">*</span></label>
+              <input
+                type="text" id="name" name="name"
+                placeholder="مثلاً: علی رضایی"
+                required autocomplete="name"
+              >
+            </div>
+            <div class="form-group">
+              <label for="email">ایمیل <span class="req">*</span></label>
+              <input
+                type="email" id="email" name="email"
+                placeholder="you@example.com"
+                required autocomplete="email"
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-method">تلگرام / شماره تماس</label>
+              <input
+                type="text" id="contact-method" name="contact_method"
+                placeholder="اختیاری"
+              >
+            </div>
+            <div class="form-group">
+              <label for="project-type">نوع پروژه <span class="req">*</span></label>
+              <select id="project-type" name="project_type" required>
+                <option value="" disabled selected>انتخاب کنید</option>
+                <option value="website">وب‌سایت کامل</option>
+                <option value="landing">لندینگ‌پیج</option>
+                <option value="optimization">بهینه‌سازی</option>
+                <option value="branding">هویت بصری</option>
+                <option value="consultation">مشاوره</option>
+                <option value="other">سایر</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="budget">بودجه‌ی تقریبی</label>
+            <select id="budget" name="budget">
+              <option value="" disabled selected>انتخاب کنید (اختیاری)</option>
+              <option value="under5">زیر ۵ میلیون تومان</option>
+              <option value="5to15">۵ تا ۱۵ میلیون</option>
+              <option value="15to30">۱۵ تا ۳۰ میلیون</option>
+              <option value="over30">بیش از ۳۰ میلیون</option>
+              <option value="unknown">هنوز نمی‌دانم</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">توضیح پروژه <span class="req">*</span></label>
+            <textarea
+              id="message" name="message" rows="5"
+              placeholder="چه می‌خواهید بسازید؟ برای چه کسی؟ چه زمانی؟"
+              required></textarea>
+          </div>
+
+          <!-- honeypot -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <span id="btn-text">ارسال درخواست</span>
+              <span class="btn-arrow">←</span>
+            </button>
+            <p id="form-status" aria-live="polite"></p>
+          </div>
+
+        </form>
+      </div>
+    </section>
+  </div>
+
+
+  <!-- ════ FOOTER ════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">WIRIPER</div>
+      <div class="footer-line">طراحی دقیق. توسعه‌ی واقعی.</div>
+      <div class="footer-copy">© ۱۴۰۵ WIRIPER</div>
+    </div>
+  </footer>
+
+
+  <!-- ════ JAVASCRIPT ════ -->
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Navbar scroll ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+
+    /* ── Mobile nav ── */
+    const burger = document.getElementById('navBurger');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        burger.setAttribute('aria-expanded', false);
+      });
     });
 
-    ctx.globalAlpha = 1;requestAnimationFrame(draw);
-  })();
-})();
+    /* ── Hero canvas (particles) — desktop only ── */
+    if (window.innerWidth >= 768) {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, pts;
 
-// ── AVATAR UPLOAD ──
-document.getElementById('avatarInput').addEventListener('change', e => {
-  const f = e.target.files[0]; if (!f) return;
-  const r = new FileReader();
-  r.onload = ev => {
-    const img = document.getElementById('avatarImg');
-    img.src = ev.target.result;
-    img.style.opacity = '1';
-    document.querySelector('.avatar-fallback').classList.remove('show');
-  };
-  r.readAsDataURL(f);
-});
+      const resize = () => {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      };
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
 
-// ── REVEAL ──
-const ro = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); }),
-  { threshold: .07 }
-);
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+      const N = 60;
+      pts = Array.from({ length: N }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.5
+      }));
 
-// ── TIMELINE REVEAL ──
-const tlo = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); tlo.unobserve(e.target); } }),
-  { threshold: .15 }
-);
-document.querySelectorAll('.tl-item').forEach((el, i) => {
-  el.style.transitionDelay = (i * 0.12) + 's';
-  tlo.observe(el);
-});
+      const GOLD = 'rgba(201,168,76,';
+      let raf;
+      const draw = () => {
+        ctx.clearRect(0, 0, W, H);
+        pts.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = GOLD + '0.6)';
+          ctx.fill();
+        });
+        for (let i = 0; i < N; i++) {
+          for (let j = i + 1; j < N; j++) {
+            const dx = pts[i].x - pts[j].x;
+            const dy = pts[i].y - pts[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 120) {
+              ctx.beginPath();
+              ctx.moveTo(pts[i].x, pts[i].y);
+              ctx.lineTo(pts[j].x, pts[j].y);
+              ctx.strokeStyle = GOLD + (1 - d / 120) * 0.15 + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+        raf = requestAnimationFrame(draw);
+      };
+      draw();
 
-// ── SKILL BARS ──
-const so = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.querySelectorAll('.sk-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
-      so.unobserve(e.target);
+      // pause when tab hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);else draw();
+      });
     }
-  });
-}, { threshold: .15 });
-so.observe(document.getElementById('skills'));
 
-// ── SCRAMBLE TEXT (Matrix decode effect) ──
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-function scramble(el, final, duration = 1200) {
-  let start = null;
-  const len = final.length;
-  function step(ts) {
-    if (!start) start = ts;
-    const prog = Math.min((ts - start) / duration, 1);
-    const revealedCount = Math.floor(prog * len);
-    let out = '';
-    for (let i = 0; i < len; i++) {
-      if (i < revealedCount) {
-        out += final[i];
+    /* ── Hero typewriter ── */
+    const typed = document.getElementById('typed-text');
+    const lines = [
+      'wiriper --build precision',
+      'design.clarity = true',
+      'deploy --ship'
+    ];
+    let li = 0, ci = 0, del = false;
+    const type = () => {
+      const line = lines[li];
+      if (!del) {
+        typed.textContent = line.slice(0, ++ci);
+        if (ci === line.length) { del = true; setTimeout(type, 1800); return; }
       } else {
-        out += Math.random() < .15 ? final[i] : CHARS[Math.random() * CHARS.length | 0];
+        typed.textContent = line.slice(0, --ci);
+        if (ci === 0) { del = false; li = (li + 1) % lines.length; }
       }
-    }
-    el.textContent = out;
-    if (prog < 1) requestAnimationFrame(step);
-    else el.textContent = final;
-  }
-  requestAnimationFrame(step);
-}
+      setTimeout(type, del ? 40 : 70);
+    };
+    setTimeout(type, 1200);
 
-// Trigger scramble when hero name enters view
-const heroEl = document.getElementById('heroName');
-const heroObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      setTimeout(() => scramble(heroEl, 'WIRIPER', 1400), 300);
-      heroObs.unobserve(e.target);
-    }
-  });
-}, { threshold: .5 });
-heroObs.observe(heroEl);
+    /* ── Scroll reveal ── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Infinite title scramble on hover
-const infTitle = document.querySelector('.inf-title');
-if (infTitle) {
-  let scrTimer;
-  infTitle.addEventListener('mouseenter', () => {
-    clearTimeout(scrTimer);
-    scramble(infTitle, 'INFINITE', 800);
-    scrTimer = setTimeout(() => scramble(infTitle, 'INFINITE', 800), 1000);
-  });
-}
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-q').setAttribute('aria-expanded', false);
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', true);
+        }
+      });
+    });
 
-// ── TOAST ──
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
-}
+    /* ── Contact form ── */
+    const form   = document.getElementById('contactForm');
+    const status = document.getElementById('form-status');
+    const btnTxt = document.getElementById('btn-text');
+    const btn    = document.getElementById('submitBtn');
 
-function copyText(text, msg) {
-  navigator.clipboard.writeText(text).then(() => showToast(msg)).catch(() => {
-    // fallback
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    document.execCommand('copy'); document.body.removeChild(ta);
-    showToast(msg);
-  });
-}
-</script>
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      btn.disabled = true;
+      btnTxt.textContent = 'در حال ارسال...';
+      status.className = '';
+      status.textContent = '';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (res.ok) {
+          status.textContent = '✓ پیام شما ارسال شد. به‌زودی پاسخ می‌گیرید.';
+          status.className = 'success';
+          form.reset();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        status.textContent = 'خطایی رخ داد. لطفاً دوباره امتحان کنید.';
+        status.className = 'error';
+      }
+
+      btn.disabled = false;
+      btnTxt.textContent = 'ارسال درخواست';
+    });})();
+  </script>
+
 </body>
 </html>
