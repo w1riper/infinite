@@ -378,11 +378,14 @@
             position: absolute;
             border-radius: 50%;
             pointer-events: none;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
         .ring-outer {
             inset: -18px;
             background: conic-gradient(from 0deg, var(--gold) 0%, var(--red) 40%, transparent 60%, var(--gold) 100%);
-            animation: spin 7s linear infinite;
+            animation: spin 10s linear infinite;
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 3px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 3px), white calc(100% - 3px));
             opacity: .7;
@@ -390,7 +393,7 @@
         .ring-inner {
             inset: -7px;
             background: conic-gradient(from 180deg, var(--red), transparent 50%, var(--gold) 50%, transparent);
-            animation: spin 3.5s linear infinite reverse;
+            animation: spin 5s linear infinite reverse;
             -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
             mask: radial-gradient(farthest-side, transparent calc(100% - 2px), white calc(100% - 2px));
             opacity: .5;
@@ -411,13 +414,9 @@
             display: block;
             border: 3px solid rgba(201, 168, 76, .18);
             background: #0d0d0d;
-            cursor: pointer;
             transition: transform .4s, box-shadow .4s, filter .4s;
-        }
-        .avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(201, 168, 76, .35), 0 0 100px rgba(201, 168, 76, .1);
-            filter: brightness(1.08);
+            pointer-events: none;
+            user-select: none;
         }
         .avatar-fallback {
             position: absolute;
@@ -439,33 +438,8 @@
         .avatar-fallback.show {
             opacity: 1;
         }
-        .avatar-edit-btn {
-            position: absolute;
-            bottom: 6px;
-            right: 6px;
-            z-index: 4;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--red);
-            border: 2px solid var(--dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 13px;
-            color: #fff;
-            transition: background .25s, transform .25s;
-        }
-        .avatar-edit-btn:hover {
-            background: var(--gold);
-            transform: scale(1.15);
-        }
-        #avatarInput {
-            display: none;
-        }
 
-        /* hero name glitch */
+        /* hero name - no glitch, only gradient */
         .hero-name {
             font-family: 'Orbitron', monospace;
             font-size: clamp(2.8rem, 9vw, 6rem);
@@ -477,75 +451,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             filter: drop-shadow(0 0 50px rgba(201, 168, 76, .2));
-            position: relative;
             cursor: default;
-        }
-        .hero-name::before,
-        .hero-name::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            font-family: 'Orbitron', monospace;
-            font-size: inherit;
-            font-weight: 900;
-            letter-spacing: 8px;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .hero-name::before {
-            background: linear-gradient(135deg, var(--red-light), var(--red));
-            animation: glitch1 4s infinite;
-        }
-        .hero-name::after {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold));
-            animation: glitch2 4s infinite;
-        }
-        @keyframes glitch1 {
-            0%,
-            94%,
-            100% {
-                opacity: 0;
-                transform: none;
-            }
-            95% {
-                opacity: .7;
-                transform: translate(-3px, 1px) skewX(-2deg);
-                clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
-            }
-            96% {
-                opacity: .5;
-                transform: translate(3px, -1px) skewX(2deg);
-                clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
-            }
-            97% {
-                opacity: 0;
-            }
-        }
-        @keyframes glitch2 {
-            0%,
-            91%,
-            100% {
-                opacity: 0;
-                transform: none;
-            }
-            92% {
-                opacity: .6;
-                transform: translate(4px, 2px) skewX(3deg);
-                clip-path: polygon(0 50%, 100% 50%, 100% 65%, 0 65%);
-            }
-            93% {
-                opacity: .4;
-                transform: translate(-2px, -2px);
-                clip-path: polygon(0 10%, 100% 10%, 100% 28%, 0 28%);
-            }
-            94% {
-                opacity: 0;
-            }
         }
 
         .hero-role {
@@ -554,6 +460,42 @@
             text-transform: uppercase;
             color: var(--gold);
             opacity: .65;
+        }
+
+        /* CTA Banner - visible call to action */
+        .hero-cta-banner {
+            background: rgba(192, 57, 43, .08);
+            border: 1.5px solid rgba(201, 168, 76, .35);
+            border-radius: 50px;
+            padding: .9rem 2.2rem;
+            font-family: 'Vazirmatn', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all .3s;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(201, 168, 76, .15);
+        }
+        .hero-cta-banner:hover {
+            background: rgba(201, 168, 76, .15);
+            border-color: var(--gold);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(201, 168, 76, .3);
+        }
+        .hero-cta-banner .cta-arrow {
+            font-size: 1.3rem;
+            transition: transform .2s;
+        }
+        .hero-cta-banner:hover .cta-arrow {
+            transform: translateY(3px);
         }
 
         .hero-quote-box {
@@ -1253,59 +1195,6 @@
             position: relative;
             cursor: default;
         }
-        .inf-title::before,
-        .inf-title::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            font-family: 'Orbitron', monospace;
-            font-size: inherit;
-            font-weight: 900;
-            letter-spacing: 5px;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .inf-title::before {
-            color: var(--gold);
-            animation: glitch3 5s infinite 1s;
-        }
-        .inf-title::after {
-            color: #fff;
-            animation: glitch4 5s infinite 1.2s;
-        }
-        @keyframes glitch3 {
-            0%,
-            93%,
-            100% {
-                opacity: 0;
-                transform: none;
-            }
-            94% {
-                opacity: .6;
-                transform: translate(-4px, 0) skewX(-4deg);
-                clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
-            }
-            95% {
-                opacity: 0;
-            }
-        }
-        @keyframes glitch4 {
-            0%,
-            90%,
-            100% {
-                opacity: 0;
-                transform: none;
-            }
-            91% {
-                opacity: .4;
-                transform: translate(4px, 2px);
-                clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
-            }
-            92% {
-                opacity: 0;
-            }
-        }
         .inf-desc {
             font-size: .86rem;
             color: #666;
@@ -1841,15 +1730,19 @@
             <div class="avatar-wrap">
                 <div class="ring ring-outer"></div>
                 <div class="ring ring-inner"></div>
-                <img class="avatar" id="avatarImg" src="IMG_4363.jpeg" alt="Wiriper" onclick="document.getElementById('avatarInput').click()"
+                <img class="avatar" id="avatarImg" src="IMG_4363.jpeg" alt="Wiriper"
                 onerror="this.style.opacity='0';document.querySelector('.avatar-fallback').classList.add('show')">
                 <div class="avatar-fallback">W</div>
-                <div class="avatar-edit-btn" onclick="document.getElementById('avatarInput').click()">✏</div>
-                <input type="file" id="avatarInput" accept="image/*">
             </div>
 
-            <div class="hero-name" data-text="WIRIPER" id="heroName">WIRIPER</div>
+            <div class="hero-name">WIRIPER</div>
             <div class="hero-role">Security · Code · Identity · 1405</div>
+
+            <!-- NEW CTA BANNER - visible, scrolls to contact -->
+            <a href="#contact" class="hero-cta-banner">
+                <span>برای مشاوره و خرید کلیک کنید</span>
+                <span class="cta-arrow">↓</span>
+            </a>
 
             <div class="hero-quote-box">
                 شکست تو رو نمی‌کشه — هویتت رو می‌سازه.<br>
@@ -2159,7 +2052,7 @@
             </div>
             <div class="inf-section">
                 <div>
-                    <div class="inf-title" data-text="INFINITE">INFINITE</div>
+                    <div class="inf-title">INFINITE</div>
                     <p class="inf-desc">
                         شخصیت منتخب Wiriper از Sonic Forces —
                         Anti-hero‌ای که پس از شکست به قدرتمندترین تبدیل شد.
@@ -2536,34 +2429,10 @@
             }
             setTimeout(typeLoop, 2400);
 
-            // ── GLITCH / SCRAMBLE on HERO NAME ──
-            const heroName = document.getElementById('heroName');
-            const original = 'WIRIPER';
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
-            function scramble(el, target, duration) {
-                let start = null;
-                function step(ts) {
-                    if (!start) start = ts;
-                    const prog = Math.min((ts - start) / duration, 1);
-                    const revealed = Math.floor(prog * target.length);
-                    let out = '';
-                    for (let i = 0; i < target.length; i++) {
-                        if (i < revealed) out += target[i];
-                        else out += chars[Math.floor(Math.random() * chars.length)];
-                    }
-                    el.textContent = out;
-                    if (prog < 1) requestAnimationFrame(step);
-                    else el.textContent = target;
-                }
-                requestAnimationFrame(step);
-            }
-            heroName.addEventListener('mouseenter', () => scramble(heroName, original, 600));
-
             // ── FAQ ACCORDION ──
             document.querySelectorAll('.faq-q').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const item = btn.closest('.faq-item');
-                    // close others
                     document.querySelectorAll('.faq-item.open').forEach(openItem => {
                         if (openItem !== item) {
                             openItem.classList.remove('open');
@@ -2573,17 +2442,6 @@
                     const open = item.classList.toggle('open');
                     btn.setAttribute('aria-expanded', open);
                 });
-            });
-
-            // ── AVATAR UPLOAD ──
-            document.getElementById('avatarInput').addEventListener('change', function() {
-                const file = this.files[0];
-                if (!file) return;
-                const url = URL.createObjectURL(file);
-                const img = document.getElementById('avatarImg');
-                img.src = url;
-                img.style.opacity = '1';
-                document.querySelector('.avatar-fallback').classList.remove('show');
             });
 
             // ── TOAST ──
@@ -2598,7 +2456,6 @@
             }
             window.copyText = function(text, label) {
                 navigator.clipboard.writeText(text).then(() => showToast(label || 'کپی شد ✓')).catch(() => {
-                    // fallback for older browsers
                     const ta = document.createElement('textarea');
                     ta.value = text;
                     ta.style.position = 'fixed';
@@ -2617,30 +2474,22 @@
             const btnText = document.getElementById('btn-text');
             const status = document.getElementById('form-status');
 
-            // Real Formspree endpoint — replace this with your actual Formspree ID when ready
-            // Example: 'https://formspree.io/f/yourFormID'
-            const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xojznood';// Set to null to use simulated submission (always works for demo)
+            const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xojznood';
 
             form.addEventListener('submit', async function(e) {
                 e.preventDefault();
-
-                // Clear previous status
                 status.textContent = '';
                 status.className = '';
 
-                // Gather values
                 const name = form.querySelector('[name="name"]').value.trim();
                 const email = form.querySelector('[name="email"]').value.trim();
-                const contactMethod = form.querySelector('[name="contact_method"]').value.trim();
                 const type = form.querySelector('[name="project_type"]').value;
                 const budget = form.querySelector('[name="budget"]').value;
                 const msg = form.querySelector('[name="message"]').value.trim();
 
-                // Validation
                 if (!name || !email || !type || !budget || !msg) {
                     status.textContent = '⚠ لطفاً تمام فیلدهای ستاره‌دار را کامل کنید (شامل محدوده بودجه).';
                     status.className = 'error';
-                    // Scroll to the first empty required field
                     const firstEmpty = form.querySelector(
                         'input[required]:invalid, select[required]:invalid, textarea[required]:invalid');
                     if (firstEmpty) firstEmpty.focus();
@@ -2653,16 +2502,13 @@
                     return;
                 }
 
-                // Disable button & show loading
                 submitBtn.disabled = true;
                 btnText.textContent = 'در حال ارسال...';
                 status.textContent = '';
                 status.className = '';
 
                 let success = false;
-
                 if (FORMSPREE_ENDPOINT) {
-                    // Real submission via Formspree
                     try {
                         const res = await fetch(FORMSPREE_ENDPOINT, {
                             method: 'POST',
@@ -2685,7 +2531,6 @@
                         status.className = 'error';
                     }
                 } else {
-                    // Simulated submission for demo — always succeeds
                     await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
                     success = true;
                 }
@@ -2697,12 +2542,10 @@
                     showToast('پیام با موفقیت ارسال شد ✓');
                 }
 
-                // Re-enable button
                 submitBtn.disabled = false;
                 btnText.textContent = 'ارسال درخواست';
             });
 
-            // ── PREVENT ACCIDENTAL OVERSCROLL / BOUNCE ON SAFARI ──
             document.addEventListener('touchmove', function(e) {}, { passive: true });
 
         })();
