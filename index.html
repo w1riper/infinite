@@ -1,519 +1,552 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiriper | The Digital Silk Road</title>
+    <title>Wiriper | ویريپر - جاده ابریشم دیجیتال</title>
+    <meta name="description" content="ویريپر - بزرگترین بازار غیرمتمرکز و لوکس NFT خاورمیانه با طراحی اصیل ایرانی">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS Variables for Cyber-Oriental Theme */
+        /* ==========================================================================
+           1. CSS VARIABLES & THEME SETTINGS (Royal Persian Palette)
+           ========================================================================== */
         :root {
-            --bg-base: #07080c;
-            --bg-surface: #11141a;
-            --border-color: #1f2833;
-            --accent-cyan: #00f5d4;
-            --accent-gold: #d4af37;
-            --text-main: #ffffff;
-            --text-muted: #8a939f;
-            --font-main: 'Plus Jakarta Sans', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Colors */
+            --bg-imperial-blue: #091626;
+            --bg-blue-glass: rgba(9, 22, 38, 0.85);
+            --text-ivory: #f9f7f1;
+            --text-muted: #d1d8e0;
+            --accent-turquoise: #00a896;
+            --accent-turquoise-glow: rgba(0, 168, 150, 0.5);
+            
+            /* Gold Palette */
+            --gold-base: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #8a6d20;
+            --gold-gradient: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-base) 25%, var(--gold-light) 50%, var(--gold-base) 75%, var(--gold-dark) 100%);
+            
+            /* Typography */
+            --font-ui: 'Vazirmatn', sans-serif;
+            --font-calligraphy: 'Noto Naskh Arabic', serif;
+            
+            /* Spacing & Layout */
             --container-max: 1400px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
         }
 
-        /* Resets & Base Styles */
+        /* ==========================================================================
+           2. RESET & BASE STYLES
+           ========================================================================== */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            font-family: var(--font-main);
+            font-family: var(--font-ui);
+            background-color: var(--bg-imperial-blue);
+            color: var(--text-ivory);
             line-height: 1.6;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            /* Geometric Grid Pattern (گره‌چینی) */
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+            background-attachment: fixed;
         }
 
-        /* Fluid Typography */
-        h1, h2, h3, h4, h5, h6 {
-            line-height: 1.2;
-            font-weight: 700;
-        }
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-imperial-blue); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 5px; border: 2px solid var(--bg-imperial-blue); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold-base); }
 
-        h1 { font-size: clamp(2.5rem, 5vw + 1rem, 4.5rem); letter-spacing: -1px; }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); }
-        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
-        p { font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--text-muted); }
-        
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul { list-style: none; }
-
-        /* Layout Utility */
         .container {
             width: 100%;
             max-width: var(--container-max);
             margin: 0 auto;
-            padding: 0 1.5rem;
+            padding: 0 clamp(1rem, 5vw, 3rem);
         }
 
-        /* Helper Classes */
-        .text-gradient {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+        /* ==========================================================================
+           3. ORNAMENTAL & UTILITY CLASSES (تذهیب)
+           ========================================================================== */
+        /* Core Medallion Background */
+        .shamseh-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(300px, 80vw, 800px);
+            height: clamp(300px, 80vw, 800px);
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g stroke="%23d4af37" stroke-width="0.3" fill="none"><circle cx="50" cy="50" r="48" opacity="0.2"/><circle cx="50" cy="50" r="42" opacity="0.3"/><g transform="translate(50,50)"><path d="M 0 -42 L 8 -12 L 42 0 L 8 12 L 0 42 L -8 12 L -42 0 L -8 -12 Z" fill="rgba(0,168,150,0.05)"/><path d="M 0 -42 L 8 -12 L 42 0 L 8 12 L 0 42 L -8 12 L -42 0 L -8 -12 Z" transform="rotate(45)" fill="rgba(212,175,55,0.05)"/><circle cx="0" cy="0" r="15" stroke="%2300a896" stroke-width="0.5"/><path d="M 0 -15 L 3 -4 L 15 0 L 3 4 L 0 15 L -3 4 L -15 0 L -3 -4 Z" stroke="%2300a896" opacity="0.5"/><path d="M 0 -15 L 3 -4 L 15 0 L 3 4 L 0 15 L -3 4 L -15 0 L -3 -4 Z" transform="rotate(45)" stroke="%2300a896" opacity="0.5"/></g></g></svg>') no-repeat center center;
+            background-size: contain;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+            animation: spinSlow 120s linear infinite;
+        }
+
+        @keyframes spinSlow { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        /* Royal Frame */
+        .royal-frame {
+            position: relative;
+            background: var(--bg-blue-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: var(--radius-sm);
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .royal-frame::before, .royal-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gold-base);
+            transition: all 0.4s ease;
+        }
+
+        .royal-frame::before { top: -4px; right: -4px; border-bottom: none; border-left: none; }
+        .royal-frame::after { bottom: -4px; left: -4px; border-top: none; border-right: none; }
+
+        .royal-frame:hover {
+            box-shadow: 0 0 30px rgba(0, 168, 150, 0.15);
+            border-color: rgba(212, 175, 55, 0.8);
+        }
+
+        .royal-frame:hover::before, .royal-frame:hover::after {
+            width: calc(100% + 8px);
+            height: calc(100% + 8px);
+            border-color: var(--accent-turquoise);
+            opacity: 0.3;
+        }
+
+        /* Gold Gradient Text */
+        .text-gold {
+            background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
         }
 
-        .text-gold { color: var(--accent-gold); }
-        .text-cyan { color: var(--accent-cyan); }
+        @keyframes shine { to { background-position: 200% center; } }
 
         /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-height: 48px;
-            padding: 0 1.5rem;
-            font-family: var(--font-main);
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: var(--transition);
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-ui);
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--bg-imperial-blue);
+            background: var(--gold-gradient);
+            background-size: 200% auto;
             border: none;
-            outline: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            min-height: 48px; /* Mobile touch target */
         }
 
-        .btn-primary {
-            background: transparent;
-            color: var(--accent-cyan);
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 0 10px rgba(0, 245, 212, 0.1);
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            background: var(--gold-base);
+            z-index: -1;
+            border-radius: calc(var(--radius-sm) - 2px);
+            transition: opacity 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background: rgba(0, 245, 212, 0.1);
-            box-shadow: 0 0 20px rgba(0, 245, 212, 0.3);
+        .btn:hover {
+            color: var(--text-ivory);
             transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .btn-gold {
-            background: transparent;
-            color: var(--accent-gold);
-            border: 1px solid var(--accent-gold);
+        .btn:hover::before {
+            background: var(--bg-imperial-blue);
         }
 
-        .btn-gold:hover {
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-            transform: translateY(-2px);
+        .btn.connected {
+            background: var(--accent-turquoise);
+            color: var(--text-ivory);
+            border: 1px solid var(--accent-turquoise);
+        }
+        .btn.connected::before {
+            background: var(--bg-imperial-blue);
+        }
+        .btn.connected:hover {
+            box-shadow: 0 0 20px var(--accent-turquoise-glow);
         }
 
-        .btn-connected {
-            background: var(--bg-surface);
-            color: var(--text-main);
-            border: 1px solid var(--accent-cyan);
-            box-shadow: 0 0 15px rgba(0, 245, 212, 0.2) inset;
-        }
-
-        /* Header Navigation */
+        /* ==========================================================================
+           4. LAYOUT SECTIONS
+           ========================================================================== */
+        
+        /* Header */
         header {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: rgba(7, 8, 12, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            z-index: 100;
-            display: flex;
-            align-items: center;
+            top: 0; left: 0; right: 0;
+            height: 90px;
+            background: linear-gradient(to bottom, rgba(9, 22, 38, 0.95), rgba(9, 22, 38, 0));
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: baseline;
-            gap: 1rem;
+            height: 100%;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
         }
 
-        .subtitle {
-            font-size: 0.8rem;
-            font-weight: 600;
+        .logo-fa {
+            font-family: var(--font-calligraphy);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tag {
+            font-family: var(--font-ui);
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: var(--accent-turquoise);
             letter-spacing: 1px;
-            color: var(--accent-gold);
-            text-transform: uppercase;
-            display: none; /* Hidden on ultra-small screens */
         }
 
-        @media (min-width: 768px) {
-            .subtitle { display: block; }
-        }
-
-        /* Main Content Padding for Fixed Header */
+        /* Main Content Padding */
         main {
-            padding-top: 100px;
+            padding-top: 120px;
+            position: relative;
         }
 
-        /* Cinematic Hero Section */
+        /* Hero Section */
         .hero {
+            text-align: center;
+            padding: clamp(3rem, 10vw, 6rem) 0;
             position: relative;
-            min-height: 70vh;
+        }
+
+        .hero h1 {
+            font-family: var(--font-calligraphy);
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            line-height: 2;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        /* Wallet Status Container */
+        .wallet-container {
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+            text-align: center;
+        }
+
+        .wallet-box {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px dashed var(--gold-dark);
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .wallet-box.active {
+            border-style: solid;
+            border-color: var(--accent-turquoise);
+            background: rgba(0, 168, 150, 0.05);
+            color: var(--accent-turquoise);
+            box-shadow: inset 0 0 20px rgba(0, 168, 150, 0.1);
+        }
+
+        .status-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--gold-dark);
+            box-shadow: 0 0 10px var(--gold-dark);
+            transition: all 0.3s;
+        }
+
+        .wallet-box.active .status-dot {
+            background: var(--accent-turquoise);
+            box-shadow: 0 0 10px var(--accent-turquoise);
+        }
+
+        /* Global Alert Box */
+        #alert-box {
+            display: none;
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.5);
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 2rem;
+            font-weight: 500;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Section Headers */
+        .section-header {
             text-align: center;
-            padding: 4rem 0;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(0, 245, 212, 0.05) 0%, rgba(212, 175, 55, 0.02) 40%, rgba(7,8,12,0) 70%);
-            z-index: -1;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            max-width: 800px;
-        }
-
-        .hero-desc {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            max-width: 600px;
-        }
-
-        /* Interactive Wallet Container */
-        .wallet-section {
-            padding: 2rem 0 4rem;
-        }
-
-        .wallet-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 1.5rem;
-            max-width: 500px;
-            margin: 0 auto;
+            margin-bottom: 3rem;
             position: relative;
+        }
+        
+        .section-header::after {
+            content: '✧';
+            display: block;
+            color: var(--gold-base);
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-calligraphy);
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--text-ivory);
+        }
+
+        /* NFT Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .nft-card {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nft-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1.25;
+            border: 4px solid var(--bg-imperial-blue);
+            outline: 2px solid var(--gold-dark);
+            outline-offset: -1px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
             overflow: hidden;
         }
 
-        .wallet-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+        /* CSS Generated Masterpieces */
+        .nft-img-1 {
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212,175,55,0.1) 10px, rgba(212,175,55,0.1) 20px),
+                radial-gradient(circle at center, #0a1f35 0%, #03080e 100%);
+        }
+        .nft-img-2 {
+            background: 
+                conic-gradient(from 0deg at 50% 50%, rgba(0,168,150,0.2) 0deg, transparent 60deg, rgba(212,175,55,0.2) 120deg, transparent 180deg, rgba(0,168,150,0.2) 240deg, transparent 300deg, rgba(212,175,55,0.2) 360deg),
+                #091626;
+        }
+        .nft-img-3 {
+            background: 
+                radial-gradient(circle, transparent 20%, #091626 20%, #091626 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #091626 20%, #091626 80%, transparent 80%, transparent) 25px 25px,
+                linear-gradient(#d4af37 2px, transparent 2px) 0 -1px,
+                linear-gradient(90deg, #d4af37 2px, #091626 2px) -1px 0;
+            background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
         }
 
-        .wallet-status {
+        .nft-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(9, 22, 38, 0.4);
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .nft-image-wrapper:hover .nft-card-overlay {
+            opacity: 1;
+        }
+
+        .nft-details {
+            padding: 0.5rem 0;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
 
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ff4757;
-            margin-right: 8px;
-            box-shadow: 0 0 8px rgba(255, 71, 87, 0.5);
-            transition: var(--transition);
-        }
-
-        .status-indicator.active {
-            background: var(--accent-cyan);
-            box-shadow: 0 0 12px rgba(0, 245, 212, 0.8);
-        }
-
-        /* Curated NFT Showcase Grid */
-        .showcase-section {
-            padding: 4rem 0;
-        }
-
-        .section-header {
-            margin-bottom: 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        .nft-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .nft-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .nft-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.1);
-        }
-
-        .nft-visual {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background: var(--bg-base);
-            position: relative;
-        }
-
-        /* Abstract Visual Placeholders */
-        .visual-1 {
-            background: radial-gradient(circle at 30% 30%, #2b1f14 0%, #0a0e17 100%),
-                        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px);
-        }
-        
-        .visual-2 {
-            background: linear-gradient(135deg, #07080c 0%, #0a1f24 50%, #07080c 100%);
-            position: relative;
-        }
-        .visual-2::after {
-            content: '';
-            position: absolute;
-            top: 20%; left: 20%; right: 20%; bottom: 20%;
-            border: 2px solid rgba(0, 245, 212, 0.2);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(0, 245, 212, 0.1) inset;
-        }
-
-        .visual-3 {
-            background: radial-gradient(circle at 70% 70%, #1a160c 0%, #07080c 100%);
-        }
-        .visual-3::before {
-            content: '';
-            position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(0deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        .nft-info {
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            flex-grow: 1;
-        }
-
-        .nft-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .nft-artist {
-            font-size: 0.85rem;
-            color: var(--accent-cyan);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .nft-title {
-            margin-top: 0.25rem;
-            font-size: 1.2rem;
-            color: var(--text-main);
+            font-family: var(--font-calligraphy);
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            margin-bottom: 0.2rem;
         }
 
-        .nft-price-box {
+        .nft-meta {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            border-top: 1px dashed rgba(212, 175, 55, 0.2);
+            padding-top: 0.8rem;
         }
 
-        .price-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .price-value {
+        .nft-artist { color: var(--text-muted); }
+        
+        .nft-price {
             font-weight: 700;
-            color: var(--accent-gold);
-            font-size: 1.1rem;
+            color: var(--accent-turquoise);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            direction: ltr; /* Ensure ETH/SOL is correct side */
         }
 
-        /* Technical Feature Grid */
-        .features-section {
-            padding: 4rem 0 6rem;
-            background: linear-gradient(180deg, var(--bg-base) 0%, rgba(17, 20, 26, 0.5) 100%);
-        }
-
+        /* Features Section */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-bottom: 6rem;
         }
 
         .feature-card {
-            background: rgba(17, 20, 26, 0.6);
-            border: 1px solid var(--border-color);
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            border-color: rgba(0, 245, 212, 0.3);
-            background: rgba(17, 20, 26, 0.9);
+            text-align: center;
+            padding: 2.5rem 1.5rem;
         }
 
         .feature-icon {
-            font-size: 2rem;
-            color: var(--accent-cyan);
-            margin-bottom: 1.5rem;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem auto;
+            fill: none;
+            stroke: var(--gold-base);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
-        .feature-card h3 {
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-main);
+            color: var(--text-ivory);
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            text-align: justify;
+            text-align-last: center;
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border-color);
-            background: var(--bg-surface);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
             padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            background: rgba(9, 22, 38, 0.9);
         }
 
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
+        .footer-ornament {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--bg-imperial-blue);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            transform: translateX(-50%) rotate(45deg);
         }
 
+        .footer-ornament::inner {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid var(--accent-turquoise);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
         .footer-links {
+            margin-top: 1.5rem;
             display: flex;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
         }
 
         .footer-links a {
+            color: var(--gold-base);
+            text-decoration: none;
             font-size: 0.9rem;
-            color: var(--text-muted);
-            transition: var(--transition);
+            transition: color 0.3s;
         }
 
         .footer-links a:hover {
-            color: var(--accent-gold);
+            color: var(--accent-turquoise);
         }
 
-        .copyright {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Custom Notification Toast */
-        .notification-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            pointer-events: none;
-        }
-
-        .toast {
-            background: var(--bg-surface);
-            border-left: 4px solid var(--accent-cyan);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transform: translateX(120%);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            pointer-events: auto;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .toast.error {
-            border-left-color: #ff4757;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 440px) {
-            .hero { padding: 3rem 0; min-height: 60vh; }
-            .wallet-card { padding: 1.5rem; }
-            .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .footer-content { flex-direction: column; align-items: center; text-align: center; }
-            .notification-container {
-                bottom: 1rem; right: 1rem; left: 1rem;
-                align-items: center;
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .btn span { display: none; } /* Hide text on small header button if needed, but let's keep it fluid */
+            .header-btn-text { display: inline; }
+            @media (max-width: 480px) {
+                .header-btn-text { display: none; }
             }
-            .toast { width: 100%; transform: translateY(120%); }
-            .toast.show { transform: translateY(0); }
         }
     </style>
 </head>
@@ -521,292 +554,238 @@
 
     <header>
         <div class="container header-content">
-            <div class="logo-area">
-                <a href="#" class="logo">WIRIPER</a>
-                <span class="subtitle">The Digital Silk Road</span>
-            </div>
-            <button class="btn btn-primary" id="btn-connect-header">
-                Connect Wallet
+            <a href="#" class="logo">
+                <span class="logo-fa text-gold">ویريپر</span>
+                <span class="logo-tag">جاده ابریشم دیجیتال</span>
+            </a>
+            
+            <button id="connect-btn" class="btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path>
+                    <path d="M18 12h2"></path>
+                </svg>
+                <span class="header-btn-text">اتصال به خزانه</span>
             </button>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container hero-content">
-                <h1>Where Eastern Art Meets <br><span class="text-gradient">Blockchain Eternity</span></h1>
-                <p class="hero-desc">Discover, collect, and trade premium oriental-inspired digital assets. Wiriper bridges ancient aesthetics with modern Web3 infrastructure on the Digital Silk Road.</p>
-                <a href="#showcase" class="btn btn-gold">Explore Collection</a>
-            </div>
-        </section>
+        <div class="shamseh-bg"></div>
 
-        <section class="wallet-section">
-            <div class="container">
-                <div class="wallet-card">
-                    <div class="wallet-status">
-                        <h3 id="wallet-status-title">Access the Marketplace</h3>
-                        <p id="wallet-status-desc"><span class="status-indicator" id="status-dot"></span><span id="status-text">Not Connected to Web3</span></p>
+        <div class="container">
+            
+            <div id="alert-box"></div>
+
+            <section class="hero">
+                <h1 class="text-gold">تجلی هنر اصیل ایرانی<br>در ابدیت بلاک‌چین</h1>
+                <p>شاهکارهای هنری، فرش‌های دستبافت دیجیتال و تذهیب‌های بی‌همتا را در بزرگترین بازار غیرمتمرکز خاورمیانه کشف کنید. اصالت هزارساله، اکنون در قالب قراردادهای هوشمند.</p>
+                
+                <div class="wallet-container">
+                    <div id="wallet-status" class="wallet-box royal-frame">
+                        <div class="status-dot"></div>
+                        <span id="wallet-address">وضعیت اتصال: منتظر ورود شما...</span>
                     </div>
-                    <button class="btn btn-primary w-full" id="btn-connect-main" style="width: 100%;">
-                        Connect MetaMask
-                    </button>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="showcase" class="showcase-section">
-            <div class="container">
+            <section>
                 <div class="section-header">
-                    <div>
-                        <h2>Curated Selection</h2>
-                        <p>The finest artifacts on the Silk Road.</p>
-                    </div>
-                    <a href="#" class="text-cyan">View All Artifacts &rarr;</a>
+                    <h2>گنجینه شاهکارها</h2>
                 </div>
-
-                <div class="nft-grid">
-                    <article class="nft-card">
-                        <div class="nft-visual visual-1"></div>
-                        <div class="nft-info">
-                            <div class="nft-header">
-                                <div>
-                                    <span class="nft-artist">Zhang Wei</span>
-                                    <h3 class="nft-title">Neo-Miniature #01</h3>
-                                </div>
-                                <div class="nft-price-box">
-                                    <span class="price-label">Price</span>
-                                    <span class="price-value">1.5 ETH</span>
-                                </div>
+                
+                <div class="gallery-grid">
+                    
+                    <article class="nft-card royal-frame">
+                        <div class="nft-image-wrapper">
+                            <div class="nft-img-1" style="width:100%; height:100%;"></div>
+                            <div class="nft-card-overlay">
+                                <button class="btn">پیشنهاد قیمت</button>
                             </div>
-                            <button class="btn btn-primary" style="width: 100%; margin-top: auto;">Place Bid</button>
+                        </div>
+                        <div class="nft-details">
+                            <h3 class="nft-title">نگارگری نوظهور شماره ۰۱</h3>
+                            <div class="nft-meta">
+                                <span class="nft-artist">اثر: استاد محمود</span>
+                                <span class="nft-price">
+                                    <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor"><path d="M15.925 23.969l-9.819-5.794 9.819 13.825 9.831-13.825zM16.075 0l-9.819 16.294 9.819 5.806 9.831-5.806z"></path></svg>
+                                    1.5 ETH
+                                </span>
+                            </div>
                         </div>
                     </article>
 
-                    <article class="nft-card">
-                        <div class="nft-visual visual-2"></div>
-                        <div class="nft-info">
-                            <div class="nft-header">
-                                <div>
-                                    <span class="nft-artist">Cyber Ronin</span>
-                                    <h3 class="nft-title">Cyber Calligraphy #04</h3>
-                                </div>
-                                <div class="nft-price-box">
-                                    <span class="price-label">Price</span>
-                                    <span class="price-value">0.8 ETH</span>
-                                </div>
+                    <article class="nft-card royal-frame">
+                        <div class="nft-image-wrapper">
+                            <div class="nft-img-2" style="width:100%; height:100%;"></div>
+                            <div class="nft-card-overlay">
+                                <button class="btn">پیشنهاد قیمت</button>
                             </div>
-                            <button class="btn btn-primary" style="width: 100%; margin-top: auto;">Place Bid</button>
+                        </div>
+                        <div class="nft-details">
+                            <h3 class="nft-title">خطاطی سایبرپانک</h3>
+                            <div class="nft-meta">
+                                <span class="nft-artist">اثر: زهرا زرین‌قلم</span>
+                                <span class="nft-price">
+                                    <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor"><path d="M15.925 23.969l-9.819-5.794 9.819 13.825 9.831-13.825zM16.075 0l-9.819 16.294 9.819 5.806 9.831-5.806z"></path></svg>
+                                    0.8 ETH
+                                </span>
+                            </div>
                         </div>
                     </article>
 
-                    <article class="nft-card">
-                        <div class="nft-visual visual-3"></div>
-                        <div class="nft-info">
-                            <div class="nft-header">
-                                <div>
-                                    <span class="nft-artist">Emperor Dao</span>
-                                    <h3 class="nft-title">Imperial Silk Art</h3>
-                                </div>
-                                <div class="nft-price-box">
-                                    <span class="price-label">Price</span>
-                                    <span class="price-value">12 SOL</span>
-                                </div>
+                    <article class="nft-card royal-frame">
+                        <div class="nft-image-wrapper">
+                            <div class="nft-img-3" style="width:100%; height:100%;"></div>
+                            <div class="nft-card-overlay">
+                                <button class="btn">خرید مستقیم</button>
                             </div>
-                            <button class="btn btn-gold" style="width: 100%; margin-top: auto;">Buy Now</button>
+                        </div>
+                        <div class="nft-details">
+                            <h3 class="nft-title">فرش سلطنتی دیجیتال</h3>
+                            <div class="nft-meta">
+                                <span class="nft-artist">اثر: بافندگان بی‌نشان</span>
+                                <span class="nft-price">
+                                    <svg width="14" height="14" viewBox="0 0 32 32" fill="currentColor"><path d="M15.925 23.969l-9.819-5.794 9.819 13.825 9.831-13.825zM16.075 0l-9.819 16.294 9.819 5.806 9.831-5.806z"></path></svg>
+                                    5.0 ETH
+                                </span>
+                            </div>
                         </div>
                     </article>
+
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="features-section">
-            <div class="container">
-                <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                    <h2>Marketplace Architecture</h2>
-                    <p>Built for the future of digital ownership.</p>
+            <section>
+                <div class="section-header">
+                    <h2>ارکان پلتفرم</h2>
                 </div>
 
                 <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3>Zero-Gas Lazy Minting</h3>
-                        <p>Creators can list artwork on the Silk Road without paying upfront gas fees. The buyer covers the minting cost at the point of sale.</p>
+                    
+                    <div class="feature-card royal-frame">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                        <h4 class="feature-title">ضرب بدون کارمزد (Lazy Minting)</h4>
+                        <p class="feature-desc">آثار هنری خود را بدون پرداخت هزینه اولیه گس (Gas Fee) در شبکه ثبت کنید. هزینه ضرب تنها در زمان اولین فروش توسط خریدار پرداخت می‌شود.</p>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">📦</div>
-                        <h3>Decentralized IPFS Storage</h3>
-                        <p>All high-resolution artwork and metadata are permanently pinned to the InterPlanetary File System, ensuring immutable provenance.</p>
+                    <div class="feature-card royal-frame">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                        </svg>
+                        <h4 class="feature-title">ذخیره‌سازی غیرمتمرکز (IPFS)</h4>
+                        <p class="feature-desc">جاودانگی هنر شما تضمین شده است. تمامی اَبَرداده‌ها و فایل‌های هنری به صورت توزیع‌شده و امن در شبکه‌های IPFS ذخیره می‌گردند.</p>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">🔗</div>
-                        <h3>Cross-Chain Royalties</h3>
-                        <p>Enforced smart contract standards guarantee artists receive secondary market royalties automatically across Ethereum and Solana ecosystems.</p>
+                    <div class="feature-card royal-frame">
+                        <svg class="feature-icon" viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                        <h4 class="feature-title">حق امتیاز جهانی هنرمندان</h4>
+                        <p class="feature-desc">تضمین درآمد دائمی. قراردادهای هوشمند ما به گونه‌ای طراحی شده‌اند که از هر فروش مجدد در سراسر جهان، درصدی به عنوان حق امتیاز به خالق اثر برسد.</p>
                     </div>
+
                 </div>
-            </div>
-        </section>
+            </section>
+
+        </div>
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <div class="logo">WIRIPER</div>
+        <div class="footer-ornament">
+            <div style="position:absolute; inset:3px; border: 1px solid var(--accent-turquoise);"></div>
+        </div>
+        <div class="container">
+            <p class="footer-text">تمامی حقوق برای جاده ابریشم دیجیتال (ویریپر) محفوظ است. تجلی هنر ایرانی در بستر وب ۳.۰ &copy; ۲۰۲۶</p>
             <ul class="footer-links">
-                <li><a href="#">Explore</a></li>
-                <li><a href="#">Creators</a></li>
-                <li><a href="#">Smart Contracts</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">قرارداد هوشمند</a></li>
+                <li><a href="#">قوانین خزانه</a></li>
+                <li><a href="#">انجمن هنرمندان</a></li>
             </ul>
-            <div class="copyright">
-                &copy; 2026 Wiriper.com. The Digital Silk Road. All rights reserved.
-            </div>
         </div>
     </footer>
 
-    <div id="notification-area" class="notification-container"></div>
-
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // DOM Elements
-            const btnConnectHeader = document.getElementById("btn-connect-header");
-            const btnConnectMain = document.getElementById("btn-connect-main");
-            const statusDot = document.getElementById("status-dot");
-            const statusText = document.getElementById("status-text");
-            const walletStatusTitle = document.getElementById("wallet-status-title");
-            const notificationArea = document.getElementById("notification-area");
+        document.addEventListener('DOMContentLoaded', () => {
+            const connectBtn = document.getElementById('connect-btn');
+            const btnText = connectBtn.querySelector('.header-btn-text');
+            const walletStatus = document.getElementById('wallet-status');
+            const walletAddressText = document.getElementById('wallet-address');
+            const alertBox = document.getElementById('alert-box');
 
-            // State
-            let userAddress = null;
+            // Elegant error display
+            const showError = (message) => {
+                alertBox.textContent = message;
+                alertBox.style.display = 'block';
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 5000);
+            };
 
-            // Format Wallet Address (e.g., 0x1A2B...3C4D)
-            const formatAddress = (address) => {
-                if (!address) return "";
+            // Format address: 0x1234...ABCD
+            const truncateAddress = (address) => {
+                if (!address) return '';
                 return `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
             };
 
-            // Custom Notification System
-            const showNotification = (message, type = "success") => {
-                const toast = document.createElement("div");
-                toast.className = `toast ${type}`;
-                
-                const icon = type === "success" ? "✓" : "⚠";
-                toast.innerHTML = `<span style="font-size: 1.2rem;">${icon}</span> <span>${message}</span>`;
-                
-                notificationArea.appendChild(toast);
-                
-                // Trigger animation
-                requestAnimationFrame(() => {
-                    toast.classList.add("show");
-                });
-
-                // Remove after 4 seconds
-                setTimeout(() => {
-                    toast.classList.remove("show");
-                    setTimeout(() => {
-                        if(notificationArea.contains(toast)) {
-                            notificationArea.removeChild(toast);
-                        }
-                    }, 400); // Wait for transition
-                }, 4000);
-            };
-
-            // Update UI based on connection state
-            const updateUI = () => {
-                if (userAddress) {
-                    const truncated = formatAddress(userAddress);
-                    
-                    // Update Buttons
-                    btnConnectHeader.textContent = truncated;
-                    btnConnectHeader.classList.remove("btn-primary");
-                    btnConnectHeader.classList.add("btn-connected");
-
-                    btnConnectMain.textContent = "Wallet Connected";
-                    btnConnectMain.classList.remove("btn-primary");
-                    btnConnectMain.classList.add("btn-connected");
-
-                    // Update Status Card
-                    walletStatusTitle.textContent = "Secure Connection Active";
-                    statusDot.classList.add("active");
-                    statusText.textContent = `Connected: ${truncated}`;
-                    statusText.classList.add("text-cyan");
-                } else {
-                    // Reset UI
-                    btnConnectHeader.textContent = "Connect Wallet";
-                    btnConnectHeader.classList.add("btn-primary");
-                    btnConnectHeader.classList.remove("btn-connected");
-
-                    btnConnectMain.textContent = "Connect MetaMask";
-                    btnConnectMain.classList.add("btn-primary");
-                    btnConnectMain.classList.remove("btn-connected");
-
-                    walletStatusTitle.textContent = "Access the Marketplace";
-                    statusDot.classList.remove("active");
-                    statusText.textContent = "Not Connected to Web3";
-                    statusText.classList.remove("text-cyan");
-                }
-            };
-
-            // Handle successful connection
-            const handleAccountsChanged = (accounts) => {
-                if (accounts.length === 0) {
-                    // User disconnected
-                    userAddress = null;
-                    updateUI();
-                    showNotification("Wallet disconnected.", "error");
-                } else if (accounts[0] !== userAddress) {
-                    // Address updated
-                    userAddress = accounts[0];
-                    updateUI();
-                    showNotification(`Connected to ${formatAddress(userAddress)}`);
-                }
-            };
-
-            // Connect Wallet Logic
-            const connectWallet = async () => {
-                // Check if MetaMask or compatible wallet is injected
+            // Handle connection click
+            connectBtn.addEventListener('click', async () => {
+                // Check if window.ethereum object exists (MetaMask, TrustWallet, etc.)
                 if (typeof window.ethereum !== 'undefined') {
                     try {
                         // Request account access
-                        btnConnectHeader.textContent = "Connecting...";
-                        btnConnectMain.textContent = "Connecting...";
-                        
+                        btnText.textContent = 'در حال اتصال...';
                         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                        handleAccountsChanged(accounts);
+                        const account = accounts[0];
+
+                        // UI State Updates on Success
+                        const formattedAddress = truncateAddress(account);
+                        
+                        // Button Update
+                        connectBtn.classList.add('connected');
+                        btnText.textContent = formattedAddress;
+                        
+                        // Status Box Update
+                        walletStatus.classList.add('active');
+                        walletAddressText.innerHTML = `خزانه متصل شد: <strong style="font-family: monospace; letter-spacing: 1px;">${formattedAddress}</strong>`;
+                        
+                        alertBox.style.display = 'none';
+
+                        // Listen for account changes
+                        window.ethereum.on('accountsChanged', (newAccounts) => {
+                            if (newAccounts.length === 0) {
+                                // Disconnected
+                                connectBtn.classList.remove('connected');
+                                btnText.textContent = 'اتصال به خزانه';
+                                walletStatus.classList.remove('active');
+                                walletAddressText.textContent = 'وضعیت اتصال: منتظر ورود شما...';
+                            } else {
+                                // Switched account
+                                const newAddress = truncateAddress(newAccounts[0]);
+                                btnText.textContent = newAddress;
+                                walletAddressText.innerHTML = `خزانه متصل شد: <strong style="font-family: monospace; letter-spacing: 1px;">${newAddress}</strong>`;
+                            }
+                        });
+
                     } catch (error) {
-                        console.error(error);
-                        // Handle user rejection (error code 4001)
+                        // Handle user rejection or other errors
+                        btnText.textContent = 'اتصال به خزانه';
                         if (error.code === 4001) {
-                            showNotification("Connection rejected by user.", "error");
+                            showError('درخواست اتصال توسط شما رد شد. لطفاً دوباره تلاش کنید.');
                         } else {
-                            showNotification("An error occurred during connection.", "error");
+                            showError('خطایی در برقراری ارتباط با کیف پول رخ داد: ' + error.message);
                         }
-                        updateUI(); // Reset buttons
                     }
                 } else {
-                    // No Web3 wallet found
-                    showNotification("No Web3 wallet detected. Please install MetaMask.", "error");
+                    // No Web3 provider detected
+                    showError('کیف پول Web3 (مانند MetaMask) یافت نشد. لطفاً ابتدا افزونه را نصب نمایید.');
                 }
-            };
-
-            // Event Listeners
-            btnConnectHeader.addEventListener("click", connectWallet);
-            btnConnectMain.addEventListener("click", connectWallet);
-
-            // Listen for account changes in the wallet (if already injected)
-            if (typeof window.ethereum !== 'undefined') {
-                window.ethereum.on('accountsChanged', handleAccountsChanged);
-                
-                // Optionally check if already connected on load
-                window.ethereum.request({ method: 'eth_accounts' })
-                    .then(accounts => {
-                        if (accounts.length > 0) {
-                            userAddress = accounts[0];
-                            updateUI();
-                        }
-                    })
-                    .catch(console.error);
-            }
+            });
         });
     </script>
 </body>
